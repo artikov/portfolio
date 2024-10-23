@@ -1,0 +1,146 @@
+.dm-sans-regular {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+.nav-items {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+.nav-links a {
+    color: #666666;
+    text-decoration: none;
+    font-size: 20px;
+}
+.nav-icons {
+    display: flex;
+    gap: 1rem;
+}
+.home-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem 0;
+}
+h1 {
+    font-size: 52px;
+    color: #42446e;
+}
+.gradient-text {
+    background: linear-gradient(to right, #13B0F5, #E70FAA );
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.center-text {
+    text-align: center;
+    padding-bottom:2rem;
+}
+h2 {
+    font-size: 48px;
+    color: #42446e;
+}
+p {
+    font-size: 32px;
+    color: #666666;
+}
+.techs-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 100px 100px;
+    gap: 2rem;
+}
+.project-card {
+    max-width: 370px;
+    filter: drop-shadow(0 0 0.75rem #666666);
+}
+h3 {
+    font-size: 28px;
+    color: #42446e;
+}
+.project-card p {
+    font-size: 18px;
+}
+.project-links {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+.project-links div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.project-text {
+    background-color: white;
+    padding: 2rem;
+    border-radius:  0 0 1rem 1rem;
+}
+.project-links a {
+    color: black;
+}
+h4 {
+    color: #42446e;
+}
+.project-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
+    gap: 2rem;
+}
+.footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #666666;
+}
+.footer-info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+footer p {
+    font-size: 14px;
+}
+.footer-info div {
+    display: flex;
+    gap: 1rem;
+}
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+}
+footer a {
+    font-size: 14px;
+}
