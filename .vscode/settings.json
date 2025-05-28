@@ -1,0 +1,11 @@
+{
+	"cSpell.words": [
+		"Aceternity",
+		"extralight",
+		"fontsource",
+		"wireframes"
+	],
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+}
