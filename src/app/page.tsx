@@ -2,6 +2,7 @@
 
 import About from "@/components/About";
 import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
 import { FaSquareUpwork } from "react-icons/fa6";
 import { useState } from "react";
 
@@ -78,6 +79,7 @@ export default function Home() {
 				<main className="pt-24 lg:w-[52%] lg:py-24">
 					<About />
 					<Experience />
+					<Projects />
 				</main>
 			</div>
 		</div>
