@@ -46,3 +46,6 @@ body {
 	color: var(--foreground);
 	font-family: "Inter Variable", sans-serif;
 }
+html {
+	scroll-behavior: smooth;
+}
