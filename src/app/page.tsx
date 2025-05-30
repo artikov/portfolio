@@ -3,6 +3,7 @@
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import Footer from "@/components/Footer";
 import { FaSquareUpwork } from "react-icons/fa6";
 import { useState } from "react";
 
@@ -80,6 +81,7 @@ export default function Home() {
 					<About />
 					<Experience />
 					<Projects />
+					<Footer />
 				</main>
 			</div>
 		</div>
