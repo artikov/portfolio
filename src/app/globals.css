@@ -16,6 +16,7 @@
 	--foreground: #112d4e;
 	--surface: #dbe2ef;
 	--accent: #3f72af;
+	--headings: #112d4e;
 }
 @media (prefers-color-scheme: dark) {
 	:root {
@@ -23,6 +24,7 @@
 		--foreground: #eeeeee;
 		--surface: #393e46;
 		--accent: #00adb5;
+		--headings: white;
 	}
 }
 
@@ -31,6 +33,7 @@
 	--foreground: #eeeeee !important;
 	--surface: #393e46 !important;
 	--accent: #00adb5 !important;
+	--headings: white !important;
 }
 
 @theme inline {
@@ -39,6 +42,7 @@
 	--font-sans: var(--font-inter-sans);
 	--color-accent: var(--accent);
 	--color-surface: var(--surface);
+	--color-headings: var(--headings);
 }
 
 body {

@@ -9,7 +9,7 @@ const Projects = () => {
 			className="text-foreground/70 text-justify scroll-mt-16 mb-16"
 		>
 			<div className="sticky md:hidden top-0 z-20 -mx-6 mb-4 w-screen bg-background/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-				<h2 className="md:hidden text-xl uppercase text-white font-semibold">
+				<h2 className="md:hidden text-xl uppercase text-headings font-semibold">
 					Projects
 				</h2>
 			</div>
@@ -19,7 +19,7 @@ const Projects = () => {
 					{projectsData.map(({ id, title, description, image, tags, url }) => (
 						<li className="mb-12" key={id}>
 							<div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50 duration-500">
-								<div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition-all motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-white/5 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg lg:group-hover:backdrop-blur-lg duration-500"></div>
+								<div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition-all motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-headings/5 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg lg:group-hover:backdrop-blur-lg duration-500"></div>
 								<header className="z-10 mb-2 mt-1 sm:col-span-2 ">
 									<img
 										src={image}
@@ -28,10 +28,10 @@ const Projects = () => {
 									/>
 								</header>
 								<div className="z-10 sm:col-span-6">
-									<h3 className="font-medium leading-snug text-white">
+									<h3 className="font-medium leading-snug text-headings">
 										<div>
 											<a
-												className="inline-flex items-baseline font-medium leading-tight text-white hover:text-accent focus-visible:text-accent group/link text-base transition-all duration-500"
+												className="inline-flex items-baseline font-medium leading-tight text-headings hover:text-accent focus-visible:text-accent group/link text-base transition-all duration-500"
 												href={url}
 												target="_blank"
 												rel="noreferrer noopener"
@@ -76,9 +76,9 @@ const Projects = () => {
 						</li>
 					))}
 				</ol>
-				<h3 className="font-medium leading-snug text-white">
+				<h3 className="font-medium leading-snug text-headings">
 					<Link
-						className="inline-flex items-center leading-tight text-slate-200 font-medium group"
+						className="inline-flex items-center leading-tight text-headings font-medium group"
 						aria-label="View Full Project Archive"
 						href="/archive"
 					>
@@ -86,7 +86,7 @@ const Projects = () => {
 							<span className="border-b border-transparent pb-px transition group-hover:border-accent motion-reduce:transition-none">
 								View Full Project{" "}
 							</span>
-							<span className="whitespace-nowrap">
+							<span className="text-headings space-nowrap">
 								<span className="border-b border-transparent pb-px transition group-hover:border-accent motion-reduce:transition-none">
 									Archive
 								</span>

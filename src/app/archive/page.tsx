@@ -43,7 +43,7 @@ const ArchivePage = () => {
 				<h1 className="text-5xl font-bold mt-4 mb-8">All Projects</h1>
 				<div className="overflow-x-auto">
 					<table className="w-full text-left text-foreground">
-						<thead className="text-white font-semibold uppercase tracking-wider text-xs h-12">
+						<thead className="text-headings font-semibold uppercase tracking-wider text-xs h-12">
 							<tr>
 								<th className="pr-4">Year</th>
 								<th className="pr-4">Project</th>
@@ -57,7 +57,9 @@ const ArchivePage = () => {
 								({ id, title, tags, url, year, company, link }) => (
 									<tr key={id} className="border-t border-foreground/20 h-16">
 										<td className="pr-4 text-sm">{year}</td>
-										<td className="pr-4 font-semibold text-white">{title}</td>
+										<td className="pr-4 font-semibold text-headings">
+											{title}
+										</td>
 										<td className="pr-4 hidden md:table-cell">{company}</td>
 										<td className="flex flex-wrap gap-2 py-4">
 											{tags.map((t) => (

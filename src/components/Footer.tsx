@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
 	const linkStyles =
-		"text-white hover:text-accent transition-all duration-300 font-bold";
+		"text-headings hover:text-accent transition-all duration-300 font-bold";
 
 	return (
 		<div>

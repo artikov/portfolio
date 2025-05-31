@@ -2,14 +2,14 @@ import React from "react";
 
 const About = () => {
 	const linkStyles =
-		"text-white hover:text-accent transition-all duration-300 font-bold";
+		"text-headings hover:text-accent transition-all duration-300 font-bold";
 	return (
 		<section
 			id="about"
 			className="text-foreground/70 text-justify scroll-mt-16 mb-16"
 		>
 			<div className="sticky md:hidden top-0 z-20 -mx-6 mb-4 w-screen bg-background/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-				<h2 className="md:hidden text-xl uppercase text-white font-semibold">
+				<h2 className="md:hidden text-xl uppercase text-headings font-semibold">
 					About
 				</h2>
 			</div>
@@ -75,7 +75,7 @@ const About = () => {
 				In my free time, I enjoy reading non-fiction books, going for walks to
 				recharge, or unwinding with a few rounds of{" "}
 				<span className="group/cs font-bold inline-flex">
-					<span className="group-hover/cs:text-white group-hover/cs:-translate-y-px transform transition-all delay-75 duration-100">
+					<span className="group-hover/cs:text-headings group-hover/cs:-translate-y-px transform transition-all delay-75 duration-100">
 						C
 					</span>
 					<span className="group-hover/cs:text-yellow-500 group-hover/cs:-translate-y-px transform transition-all duration-300">
