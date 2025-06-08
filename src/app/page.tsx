@@ -5,11 +5,35 @@ import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import { FaSquareUpwork } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OtherItems from "@/components/OtherItems";
+
+const sectionIds = ["about", "experience", "projects"];
 
 export default function Home() {
 	const [position, setPosition] = useState({ x: 0, y: 0 });
+	const [active, setActive] = useState("about");
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const visibleSection = entries.find((entry) => entry.isIntersecting);
+				if (visibleSection?.target?.id) {
+					setActive(visibleSection.target.id);
+				}
+			},
+			{
+				threshold: 0.6, // section 60% visible
+			}
+		);
+
+		sectionIds.forEach((id) => {
+			const el = document.getElementById(id);
+			if (el) observer.observe(el);
+		});
+
+		return () => observer.disconnect();
+	}, []);
 
 	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
 		setPosition({ x: e.clientX, y: e.clientY + window.scrollY });
@@ -39,21 +63,35 @@ export default function Home() {
 							great UX.
 						</p>
 						<nav className="md:flex flex-col hidden gap-4 my-12 uppercase font-semibold tracking-wide text-foreground/70">
-							{["about", "experience", "projects"].map((section) => (
-								<a
-									key={section}
-									href={`#${section}`}
-									className="group flex items-center transition-all duration-500"
-								>
-									{/* Line */}
-									<span className="block h-[2px] w-7 group-hover:bg-headings group-hover:h-[3px] bg-foreground/70 transition-all duration-500 group-hover:w-14"></span>
-
-									{/* Label */}
-									<span className="ml-3 text-foreground/70 group-hover:text-headings transition-all duration-500">
-										{section.toUpperCase()}
-									</span>
-								</a>
-							))}
+							{sectionIds.map((section) => {
+								const isActive = active === section;
+								return (
+									<a
+										key={section}
+										href={`#${section}`}
+										className="group flex items-center transition-all duration-500"
+									>
+										{/* Line */}
+										<span
+											className={`block h-[2px] transition-all duration-500 ${
+												isActive
+													? "w-14 bg-headings h-[3px]"
+													: "w-7 bg-foreground/70 group-hover:w-14 group-hover:bg-headings group-hover:h-[3px]"
+											}`}
+										></span>
+										{/* Label */}
+										<span
+											className={`ml-3 transition-all duration-500 ${
+												isActive
+													? "text-headings"
+													: "text-foreground/70 group-hover:text-headings"
+											}`}
+										>
+											{section.toUpperCase()}
+										</span>
+									</a>
+								);
+							})}
 						</nav>
 					</div>
 					<div className="flex gap-4 items-center text-foreground/70">
