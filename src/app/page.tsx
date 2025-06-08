@@ -6,6 +6,7 @@ import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import { FaSquareUpwork } from "react-icons/fa6";
 import { useState } from "react";
+import OtherItems from "@/components/OtherItems";
 
 export default function Home() {
 	const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -81,6 +82,7 @@ export default function Home() {
 					<About />
 					<Experience />
 					<Projects />
+					<OtherItems />
 					<Footer />
 				</main>
 			</div>

@@ -6,7 +6,7 @@ const Footer = () => {
 		"text-headings hover:text-accent transition-all duration-300 font-bold";
 
 	return (
-		<div>
+		<footer>
 			<p className="text-sm text-foreground/70 mt-8">
 				Built with care and code in{" "}
 				<Link href="https://www.nextjs.org" className={linkStyles}>
@@ -33,7 +33,7 @@ const Footer = () => {
 					&copy; {new Date().getFullYear()} Oybek Artikov
 				</span>
 			</p>
-		</div>
+		</footer>
 	);
 };
 
