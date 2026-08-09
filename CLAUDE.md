@@ -53,23 +53,38 @@ Path alias: `@/*` → `./src/*`.
 
 ## Content
 
-`src/data/{projects,experience,site}.ts` hold the structured content, typed in
-`types.ts`. Adding a project means adding an entry to `projectsData` (homepage)
-or `archivedProjectsData` (`/archive` table), not touching a component.
+All visible copy now comes from **one content document**, reached through
+`getContent()` in `src/lib/content/store.ts`. Nothing else knows where content
+is stored.
 
-**Caveat the README understates:** roughly half the visible copy is *not* in
-`src/data` — it is inline JSX. The hero block is in `app/page.tsx`, the whole
-About section in `components/About.tsx`, footer prose in `Footer.tsx`, social
-links in `SocialLinks.tsx`, the nav section list in `SectionNav.tsx`, and all
-metadata plus the Person JSON-LD in `app/layout.tsx`. The site URL
-`https://artikov.tech` is hardcoded in four files.
+```
+src/lib/content/
+  schema.ts   types + parseSiteContent validator + homepageProjects/archiveProjects
+  seed.ts     the content the site ships with; served whenever the store is empty
+  store.ts    Vercel Blob read/write, unstable_cache'd under the 'site-content' tag
+```
 
-`projectsData` and `archivedProjectsData` duplicate title/description/tags for
-six projects verbatim. Editing one usually means editing the other.
+To change copy today, edit `seed.ts` — the admin panel that writes the stored
+document is Stage B onwards. Both pages, `layout.tsx` metadata, the Person
+JSON-LD, `sitemap.ts`, `robots.ts` and `opengraph-image.tsx` all `await
+getContent()`; the site URL now exists once, at `settings.siteUrl`.
 
-Project images are **static imports** (`StaticImageData`), so `next/image` can
-derive dimensions and avoid layout shift. They are resolved by the bundler at
-build time and cannot come from a runtime source.
+**`src/data/*` is dead.** It is kept only as the reference the seed was
+transcribed from, and is deleted at step 25. Editing it changes nothing.
+
+Homepage projects and archive rows are **one `Project` record** with
+`onHomepage` / `inArchive` and a separate `homepageOrder` / `archiveOrder` —
+the two surfaces sort the same six projects differently.
+
+Prose (About paragraphs, footer) is plain text with exactly two pieces of
+markup, `[label](https://…)` and `{cs2}`, rendered by `renderProse` in
+`components/Prose.tsx`. Everything else becomes a React text node. This is
+deliberately not `dangerouslySetInnerHTML` and must not become it — stored prose
+is untrusted input.
+
+Project images are `{ url, width, height, alt }`. The seed still derives them
+from static imports (the bundler resolves those at build time, so a stored
+record never can), but the renderer only ever sees the plain shape.
 
 ## Conventions
 
@@ -91,11 +106,19 @@ Widening it is a security-relevant change — scope any addition to an exact hos
 
 ## Active work
 
-An admin panel is planned but **not started**. The full plan — codebase
-analysis, what becomes dynamic, and a 26-step sequenced build order with risk
-flags — is in [docs/admin-panel-plan.md](docs/admin-panel-plan.md).
+An admin panel is being built. The full plan — what becomes dynamic and a
+26-step sequenced build order with risk flags — is in
+[docs/admin-panel-plan.md](docs/admin-panel-plan.md), which is the source of
+truth. Read it before changing how content is loaded, auth, or anything under
+`/admin`. Update its checkboxes as steps land, and record decisions there rather
+than only in chat.
 
-Read that document before changing `src/data`, how content is loaded, auth, or
-anything under `/admin`. Two decisions in its "Open decisions" section are
-unresolved; do not start step 1 until they are. Update its checkboxes as steps
-land, and record new decisions there rather than only in chat.
+**Stage A (steps 1–4) is done**: content flows through the store and the
+rendered output is byte-identical to the pre-migration site. Nothing is editable
+yet — that is the point, every later stage is additive. **Next up: step 5**,
+password hashing.
+
+Storage is Vercel Blob. `BLOB_READ_WRITE_TOKEN` is optional: without it the
+store serves the seed and refuses writes, which is what lets CI and a fresh
+clone build with no secrets. It must be set in production, or the site quietly
+serves seed content instead of saved content.

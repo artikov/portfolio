@@ -1,56 +1,58 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { getContent } from "@/lib/content/store";
 
 const interSans = Inter({
 	variable: "--font-inter-sans",
 	subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-	title: "Oybek Artikov - Frontend Developer",
-	description:
-		"I build pixel-perfect, responsive, and accessible web experiences.",
-	metadataBase: new URL("https://artikov.tech"),
-	alternates: {
-		canonical: "/",
-	},
-	openGraph: {
-		title: "Oybek Artikov - Frontend Developer",
-		description: "Portfolio site showcasing work, experience, and projects.",
-		url: "https://artikov.tech",
-		siteName: "artikov.tech",
-		type: "website",
-	},
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const { settings } = await getContent();
+	const { seo } = settings;
 
-const personJsonLd = {
-	"@context": "https://schema.org",
-	"@type": "Person",
-	name: "Oybek Artikov",
-	url: "https://artikov.tech",
-	jobTitle: "Frontend Developer",
-	description:
-		"I build pixel-perfect, responsive, and accessible web experiences.",
-	worksFor: {
-		"@type": "Organization",
-		name: "The Ministry of Digital Technologies",
-		url: "https://gov.uz/en/digital",
-	},
-	sameAs: [
-		"https://github.com/artikov",
-		"https://www.linkedin.com/in/artikov/",
-		"https://x.com/artikov08",
-		"https://instagram.com/artikxv",
-		"https://www.upwork.com/freelancers/artikov",
-	],
-};
+	return {
+		title: seo.title,
+		description: seo.description,
+		metadataBase: new URL(settings.siteUrl),
+		alternates: {
+			canonical: "/",
+		},
+		openGraph: {
+			title: seo.ogTitle,
+			description: seo.ogDescription,
+			url: settings.siteUrl,
+			siteName: seo.siteName,
+			type: "website",
+		},
+	};
+}
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const content = await getContent();
+	const { profile, settings } = content;
+
+	const personJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "Person",
+		name: profile.name,
+		url: settings.siteUrl,
+		jobTitle: profile.role,
+		description: settings.seo.description,
+		worksFor: {
+			"@type": "Organization",
+			name: settings.seo.worksFor.name,
+			url: settings.seo.worksFor.url,
+		},
+		// Derived from the social links so the two can never disagree.
+		sameAs: content.socials.map((social) => social.href),
+	};
+
 	return (
 		<html lang="en">
 			<body className={`${interSans.variable} antialiased`}>

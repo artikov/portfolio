@@ -1,28 +1,18 @@
 import React from "react";
 import CurrentYear from "./CurrentYear";
-import ExternalLink from "./ExternalLink";
+import { renderProse } from "./Prose";
+import type { FooterContent } from "@/lib/content/schema";
 
-const Footer = () => {
+const Footer = ({ content }: { content: FooterContent }) => {
 	return (
 		<footer>
 			<p className="text-sm text-foreground/70 mt-8">
-				Built with care and code in{" "}
-				<ExternalLink href="https://nextjs.org">Next.js</ExternalLink> and{" "}
-				<ExternalLink href="https://tailwindcss.com">Tailwind CSS</ExternalLink>
-				, this site reflects my passion for clean design and performance.
-				Deployed via{" "}
-				<ExternalLink href="https://vercel.com">Vercel</ExternalLink>, crafted
-				in{" "}
-				<ExternalLink href="https://code.visualstudio.com">
-					VS Code
-				</ExternalLink>
-				. <br />
-				<span className="mt-2 block">
-					Always evolving, just like my journey in tech.
-				</span>
+				{renderProse(content.prose)}
+				<br />
+				<span className="mt-2 block">{content.tagline}</span>
 				<span className="text-accent font-semibold">
-					&copy; <CurrentYear buildYear={new Date().getFullYear()} /> Oybek
-					Artikov
+					&copy; <CurrentYear buildYear={new Date().getFullYear()} />{" "}
+					{content.name}
 				</span>
 			</p>
 		</footer>

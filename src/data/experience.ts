@@ -1,3 +1,7 @@
+// DEAD CODE. Nothing imports this module any more -- the site reads content
+// through `getContent()` in src/lib/content/store.ts. It is kept only as the
+// reference src/lib/content/seed.ts was transcribed from, and is deleted at
+// step 25 of docs/admin-panel-plan.md. Editing it changes nothing.
 import type { Experience } from "./types";
 
 export const experienceData: Experience[] = [

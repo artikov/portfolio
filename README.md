@@ -37,15 +37,18 @@ Then open [http://localhost:3000](http://localhost:3000).
 src/
   app/         routes, metadata, sitemap/robots, OG image
   components/  UI; only CursorGlow, SectionNav and CurrentYear are client
-  data/        projects, experience and site content, typed in types.ts
+  data/        superseded by lib/content; kept until the admin panel lands
+  lib/content/ the content document: schema, seed, and the Blob-backed store
   lib/         shared style strings
 public/        CV and project screenshots
 ```
 
-Content lives in `src/data` — adding a project means adding an entry to
-`projectsData` (homepage) or `archivedProjectsData` (`/archive` table), not
-touching a component. Project thumbnails are imported statically so `next/image`
-can derive their dimensions and avoid layout shift.
+All copy comes from one content document, read through `getContent()` in
+`src/lib/content/store.ts`. Until the admin panel can write to it, editing
+content means editing `src/lib/content/seed.ts` — adding a project is one entry
+in `projects`, flagged `onHomepage` and/or `inArchive`. Project thumbnails are
+still imported statically in the seed so `next/image` can derive their
+dimensions and avoid layout shift.
 
 ## Notes
 

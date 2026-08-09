@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
+import { getContent } from "@/lib/content/store";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+	const { settings } = await getContent();
+
 	return {
 		rules: { userAgent: "*", allow: "/" },
-		sitemap: "https://artikov.tech/sitemap.xml",
+		sitemap: new URL("/sitemap.xml", settings.siteUrl).toString(),
 	};
 }

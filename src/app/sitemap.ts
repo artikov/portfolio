@@ -1,10 +1,16 @@
 import type { MetadataRoute } from "next";
+import { getContent } from "@/lib/content/store";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+	const { settings } = await getContent();
 	const lastModified = new Date();
 
 	return [
-		{ url: "https://artikov.tech", lastModified, priority: 1 },
-		{ url: "https://artikov.tech/archive", lastModified, priority: 0.8 },
+		{ url: settings.siteUrl, lastModified, priority: 1 },
+		{
+			url: new URL("/archive", settings.siteUrl).toString(),
+			lastModified,
+			priority: 0.8,
+		},
 	];
 }

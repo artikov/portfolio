@@ -1,15 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { NavSection } from "@/lib/content/schema";
 
-const sections = [
-	{ id: "about", label: "About" },
-	{ id: "experience", label: "Experience" },
-	{ id: "projects", label: "Projects" },
-];
-
-const SectionNav = () => {
-	const [active, setActive] = useState("about");
+const SectionNav = ({ sections }: { sections: NavSection[] }) => {
+	const [active, setActive] = useState(sections[0]?.id ?? "");
 
 	useEffect(() => {
 		const elements = sections
@@ -49,7 +44,7 @@ const SectionNav = () => {
 			window.removeEventListener("resize", onScroll);
 			if (frame) cancelAnimationFrame(frame);
 		};
-	}, []);
+	}, [sections]);
 
 	return (
 		<nav
