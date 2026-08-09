@@ -1,10 +1,15 @@
 import { ImageResponse } from "next/og";
+import { getContent } from "@/lib/content/store";
 
+// `alt` has to be a static export -- Next reads it without running the route --
+// so it cannot come from the store like the rest of this file does.
 export const alt = "Oybek Artikov - Frontend Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+	const { profile, settings } = await getContent();
+
 	return new ImageResponse(
 		(
 			<div
@@ -29,7 +34,7 @@ export default function OpengraphImage() {
 						letterSpacing: "-0.03em",
 					}}
 				>
-					Oybek Artikov
+					{profile.name}
 				</div>
 				<div
 					style={{
@@ -40,7 +45,7 @@ export default function OpengraphImage() {
 						color: "#00adb5",
 					}}
 				>
-					Frontend Developer
+					{profile.role}
 				</div>
 				<div
 					style={{
@@ -52,7 +57,7 @@ export default function OpengraphImage() {
 						color: "#eeeeee",
 					}}
 				>
-					I build pixel-perfect, responsive, and accessible web experiences.
+					{settings.seo.description}
 				</div>
 				<div
 					style={{
@@ -77,7 +82,7 @@ export default function OpengraphImage() {
 							color: "#eeeeee",
 						}}
 					>
-						artikov.tech
+						{settings.seo.siteName}
 					</div>
 				</div>
 			</div>

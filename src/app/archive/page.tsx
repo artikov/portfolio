@@ -1,18 +1,24 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { archivedProjectsData } from "@/data/projects";
 import { ArrowRightIcon } from "@/components/icons";
 import CursorGlow from "@/components/CursorGlow";
+import { archiveProjects } from "@/lib/content/schema";
+import { getContent } from "@/lib/content/store";
 
-export const metadata: Metadata = {
-	title: "Project Archive - Oybek Artikov",
-	description:
-		"A complete list of the web projects I've built, from client work to personal experiments.",
-	alternates: { canonical: "/archive" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const { settings } = await getContent();
 
-const ArchivePage = () => {
+	return {
+		title: settings.seo.archiveTitle,
+		description: settings.seo.archiveDescription,
+		alternates: { canonical: "/archive" },
+	};
+}
+
+const ArchivePage = async () => {
+	const content = await getContent();
+
 	return (
 		<CursorGlow>
 			<div className="min-h-screen max-w-screen-xl mx-auto px-6 py-12 font-sans md:px-12 md:py-16 ">
@@ -21,7 +27,7 @@ const ArchivePage = () => {
 					className="group mb-2 inline-flex items-center font-semibold leading-tight text-accent"
 				>
 					<ArrowRightIcon className="mr-1 h-4 w-4 rotate-180 transition-transform group-hover:-translate-x-2" />
-					Oybek Artikov
+					{content.profile.name}
 				</Link>
 				<h1 className="text-5xl font-bold mt-4 mb-8">All Projects</h1>
 				<div className="overflow-x-auto">
@@ -36,7 +42,7 @@ const ArchivePage = () => {
 							</tr>
 						</thead>
 						<tbody className="">
-							{archivedProjectsData.map(
+							{archiveProjects(content).map(
 								({ id, title, tags, url, year, company, link }) => (
 									<tr key={id} className="border-t border-foreground/20 h-16">
 										<td className="pr-4 text-sm">{year}</td>

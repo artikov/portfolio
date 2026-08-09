@@ -3,9 +3,9 @@ import Link from "next/link";
 import ProjectCard from "./ProjectCard";
 import SectionHeading from "./SectionHeading";
 import { ArrowRightIcon } from "./icons";
-import { projectsData } from "@/data/projects";
+import type { Project } from "@/lib/content/schema";
 
-const Projects = () => {
+const Projects = ({ projects }: { projects: Project[] }) => {
 	return (
 		<section
 			id="projects"
@@ -16,7 +16,7 @@ const Projects = () => {
 
 			<div>
 				<ol className="flex flex-col group/list transition-all duration-500 ">
-					{projectsData.map((project) => (
+					{projects.map((project) => (
 						<ProjectCard key={project.id} {...project} />
 					))}
 				</ol>

@@ -1,9 +1,15 @@
 import React from "react";
 import SectionHeading from "./SectionHeading";
 import { ExternalLinkIcon } from "./icons";
-import { experienceData } from "@/data/experience";
+import type { ExperienceItem } from "@/lib/content/schema";
 
-const Experience = () => {
+const Experience = ({
+	items,
+	resumeUrl,
+}: {
+	items: ExperienceItem[];
+	resumeUrl: string;
+}) => {
 	return (
 		<section
 			id="experience"
@@ -12,7 +18,7 @@ const Experience = () => {
 		>
 			<SectionHeading id="experience-heading">Experience</SectionHeading>
 			<ol className="flex flex-col group/list transition-all duration-500 ">
-				{experienceData.map(
+				{items.map(
 					({ id, title, description, company, years, tags, link }) => (
 						<li className="mb-12" key={id}>
 							<div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50 duration-500">
@@ -65,7 +71,7 @@ const Experience = () => {
 				<div>
 					<a
 						className="inline-flex items-baseline font-medium leading-tight text-headings hover:text-accent focus-visible:text-accent group/link text-base transition-all duration-500"
-						href="/cv.pdf"
+						href={resumeUrl}
 						target="_blank"
 						rel="noreferrer noopener"
 					>

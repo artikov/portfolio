@@ -1,6 +1,6 @@
 # Admin panel — implementation plan
 
-Status: **planned, not started.** Two decisions still open (see "Open decisions").
+Status: **Stage A complete.** Both open decisions resolved 2026-08-09.
 Written 2026-08-09 against commit `f3574e8` (branch `phase2-audit-fixes`).
 
 This document is the source of truth for the admin-panel work. Update the
@@ -115,7 +115,61 @@ deduplication is the main structural win of the migration. (See open decision B.
 Conventions: each step ends with a verification check. 🔴 = high-risk (touches
 auth or shared production data), 🟡 = medium.
 
-### Open decisions — resolve before step 1
+### Decisions — resolved 2026-08-09
+
+**A. Storage backend → Vercel Blob.** `@vercel/blob` is installed; everything
+goes through the repository interface in step 3, so Postgres remains a one-file
+swap.
+
+**B. Unify Projects and Archive → yes.** One `Project` record with
+`onHomepage` / `inArchive`. Because the homepage and the archive order the same
+six records differently, the record carries **two** order fields,
+`homepageOrder` and `archiveOrder`, not the single `order` sketched below.
+
+#### Deviations taken in Stage A
+
+- **Env validation is per-group and lazy, not at module load.** The public site
+  imports the content store during `next build`; validating admin credentials
+  eagerly would make the public site unbuildable without secrets, and would have
+  put CI red from step 1 until step 26. `src/lib/env.ts` exposes `requireEnv` /
+  `optionalEnv`, and only accessors with a live caller exist — the auth ones
+  arrive with steps 5–6.
+- **No `flags` field in the schema yet.** Nothing reads it until step 20.
+- **`BLOB_READ_WRITE_TOKEN` is optional.** Unset, `getContent()` serves the seed
+  and `saveContent()` throws. This is what keeps CI and a fresh clone building.
+  *Residual risk:* a token missing in production silently serves seed content
+  instead of edited content. Step 24 must assert the token is present in
+  production.
+- **Step 26's dummy CI env vars turn out to be unnecessary.** Because env
+  validation is lazy and the Blob token is optional, `npm ci && npm run lint &&
+  npm run build` is green with no secrets at all. `.github/workflows/ci.yml` was
+  left untouched. Step 26 reduces to the `/admin` redirect smoke test.
+- **`settings.blogUrl` was dropped.** `src/data/site.ts` exported `blogUrl` for
+  exactly one consumer — the Writing card's `url`. Keeping both would be a
+  second field to drift; the URL now lives on the record. Tier 3 item 13 is
+  still a labelled field in the admin, just backed by the Writing record.
+- **`SectionNav` stayed a single client component** taking `sections` as a prop
+  rather than splitting into a server parent and client child. Every row's
+  classes depend on the scroll-spy state, so the split would have moved no
+  markup to the server.
+
+#### Findings worth carrying forward
+
+- **`revalidateTag` changed in Next 16**: it now requires a `cacheLife` profile
+  and expires lazily. `revalidateContent()` uses **`updateTag`**, which expires
+  immediately and gives the admin read-your-own-writes — but may only be called
+  from a Server Action. Step 10's wrapper is the only caller, so this holds.
+- **`.gitignore`'s `.env*` also matched `.env.example`**, which would have kept
+  the template out of the repo entirely. Fixed with a `!.env.example` negation.
+- **JSON-LD `sameAs` order changed.** It derives from the social links now
+  (item 12), and the icon row orders Instagram before X while the old literal
+  did the reverse. Order is not meaningful in `sameAs`; the five URLs are
+  unchanged.
+- **`opengraph-image.tsx`'s `alt` export cannot come from the store** — Next
+  reads it statically without running the route. It is the one string in that
+  file still hardcoded.
+
+### Original open decisions (kept for context)
 
 **A. Storage backend.** Vercel's filesystem is read-only at runtime, so `public/`
 and `src/data` cannot be written to. **Persisting anything requires exactly one
@@ -136,7 +190,7 @@ it changes the shape of both public pages. Needs an explicit yes.
 
 ### Stage A — Foundation (site unchanged, still fully static)
 
-- [ ] **1. Env and config scaffolding.** `.env.local` (already gitignored) and a
+- [x] **1. Env and config scaffolding.** `.env.local` (already gitignored) and a
   committed `.env.example` declaring `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`,
   `SESSION_SECRET`, `SESSION_VERSION`, `BLOB_READ_WRITE_TOKEN`. Add
   `src/lib/env.ts` validating them once at module load, throwing an error that
@@ -144,7 +198,7 @@ it changes the shape of both public pages. Needs an explicit yes.
   *Verify:* `npm run build` succeeds; removing a var fails the build with a
   readable message, not `undefined`.
 
-- [ ] **2. Content schema.** `src/lib/content/schema.ts` typing the whole
+- [x] **2. Content schema.** `src/lib/content/schema.ts` typing the whole
   document: `SiteContent { profile, about, experience[], projects[], socials[],
   settings, flags, version, updatedAt }`. Merge `Project` and `ArchivedProject`
   into one `Project` with `onHomepage`/`inArchive`/`order`. Replace
@@ -153,7 +207,7 @@ it changes the shape of both public pages. Needs an explicit yes.
   a validation library is a new dependency for four functions.
   *Verify:* `tsc` passes; validators reject a malformed fixture.
 
-- [ ] **3. Seed data + store interface** 🟡. `src/lib/content/seed.ts` — the
+- [x] **3. Seed data + store interface** 🟡. `src/lib/content/seed.ts` — the
   *exact* current content transcribed into the new schema, verified field by
   field. `src/lib/content/store.ts` exposing `getContent()` / `saveContent()`.
   `getContent()` reads the Blob JSON and **returns the seed if the blob does not
@@ -165,7 +219,7 @@ it changes the shape of both public pages. Needs an explicit yes.
   *Verify:* a scratch script deep-equals `getContent()` against the old
   `src/data` exports.
 
-- [ ] **4. Point the public site at the store** 🔴. Convert `Projects`,
+- [x] **4. Point the public site at the store** 🔴. Convert `Projects`,
   `OtherItems`, `Experience`, the archive table, `SocialLinks`, `Footer`, the
   hero block, `About`, `SectionNav`, `layout.tsx` metadata, `sitemap.ts`,
   `robots.ts`, `opengraph-image.tsx` to `await getContent()`. `SocialLinks` and

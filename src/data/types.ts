@@ -1,3 +1,6 @@
+// DEAD CODE. Only the other src/data modules still import this; the site's
+// types live in src/lib/content/schema.ts. Deleted at step 25 of
+// docs/admin-panel-plan.md.
 import type { StaticImageData } from "next/image";
 
 export interface Project {
