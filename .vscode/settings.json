@@ -10,5 +10,5 @@
 	],
 	"files.associations": {
 		"*.css": "tailwindcss"
-	},
+	}
 }
