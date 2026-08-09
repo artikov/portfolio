@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import blogImage from "../../public/projects/blog.png";
+import { blogUrl } from "../../data/site";
 
 const OtherItems = () => {
 	return (
@@ -24,7 +25,7 @@ const OtherItems = () => {
 								<div>
 									<a
 										className="inline-flex items-baseline font-medium leading-tight text-headings hover:text-accent focus-visible:text-accent group/link text-base transition-all duration-500"
-										href={"https://artikov-1144079.ingress-daribow.ewp.live/"}
+										href={blogUrl}
 										target="_blank"
 										rel="noreferrer noopener"
 									>
