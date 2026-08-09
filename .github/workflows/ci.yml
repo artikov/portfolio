@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # `npm ci` fails outright when package.json and the lockfile drift apart,
+      # which is how a merged security patch silently went undeployed before.
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run build

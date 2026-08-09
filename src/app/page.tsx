@@ -1,53 +1,15 @@
-"use client";
-
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
-import { FaSquareUpwork } from "react-icons/fa6";
-import { useState, useEffect } from "react";
+import CursorGlow from "@/components/CursorGlow";
+import SectionNav from "@/components/SectionNav";
 import OtherItems from "@/components/OtherItems";
-
-const sectionIds = ["about", "experience", "projects"];
+import SocialLinks from "@/components/SocialLinks";
 
 export default function Home() {
-	const [position, setPosition] = useState({ x: 0, y: 0 });
-	const [active, setActive] = useState("about");
-
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const visibleSection = entries.find((entry) => entry.isIntersecting);
-				if (visibleSection?.target?.id) {
-					setActive(visibleSection.target.id);
-				}
-			},
-			{
-				threshold: 0.6, // section 60% visible
-			}
-		);
-
-		sectionIds.forEach((id) => {
-			const el = document.getElementById(id);
-			if (el) observer.observe(el);
-		});
-
-		return () => observer.disconnect();
-	}, []);
-
-	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		setPosition({ x: e.clientX, y: e.clientY + window.scrollY });
-	};
-
 	return (
-		<div onMouseMove={handleMouseMove} className="relative">
-			<div
-				className="pointer-events-none fixed inset-0 z-40 transition duration-300 lg:absolute"
-				style={{
-					background: `radial-gradient(600px at ${position.x}px ${position.y}px, rgba(29, 78, 116, 0.15), transparent 80%)`,
-				}}
-			></div>
-
+		<CursorGlow>
 			<div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0 md:flex">
 				{/* Sidebar */}
 				<aside className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
@@ -62,83 +24,12 @@ export default function Home() {
 							I craft modern, responsive user interfaces with clean code and
 							great UX.
 						</p>
-						<nav className="md:flex flex-col hidden gap-4 my-12 uppercase font-semibold tracking-wide text-foreground/70">
-							{sectionIds.map((section) => {
-								const isActive = active === section;
-								return (
-									<a
-										key={section}
-										href={`#${section}`}
-										className="group flex items-center transition-all duration-500"
-									>
-										{/* Line */}
-										<span
-											className={`block h-[2px] transition-all duration-500 ${
-												isActive
-													? "w-14 bg-headings h-[3px]"
-													: "w-7 bg-foreground/70 group-hover:w-14 group-hover:bg-headings group-hover:h-[3px]"
-											}`}
-										></span>
-										{/* Label */}
-										<span
-											className={`ml-3 transition-all duration-500 ${
-												isActive
-													? "text-headings"
-													: "text-foreground/70 group-hover:text-headings"
-											}`}
-										>
-											{section.toUpperCase()}
-										</span>
-									</a>
-								);
-							})}
-						</nav>
+						<SectionNav />
 					</div>
-					<div className="flex gap-4 items-center text-foreground/70">
-						<a
-							href="https://github.com/artikov"
-							target="_blank"
-							rel="noreferrer noopener"
-							aria-label="GitHub"
-						>
-							<i className="ri-github-fill text-3xl hover:text-headings transition-all duration-400"></i>
-						</a>
-						<a
-							href="https://www.linkedin.com/in/artikov/"
-							target="_blank"
-							rel="noreferrer noopener"
-							aria-label="LinkedIn"
-						>
-							<i className="ri-linkedin-box-fill text-3xl hover:text-headings transition-all duration-400"></i>
-						</a>
-						<a
-							href="https://instagram.com/artikxv"
-							target="_blank"
-							rel="noreferrer noopener"
-							aria-label="Instagram"
-						>
-							<i className="ri-instagram-fill text-3xl hover:text-headings transition-all duration-400"></i>
-						</a>
-						<a
-							href="https://x.com/artikov08"
-							target="_blank"
-							rel="noreferrer noopener"
-							aria-label="X (formerly Twitter)"
-						>
-							<i className="ri-twitter-x-fill text-3xl hover:text-headings transition-all duration-400"></i>
-						</a>
-						<a
-							href="https://www.upwork.com/freelancers/artikov"
-							target="_blank"
-							rel="noreferrer noopener"
-							aria-label="Upwork"
-						>
-							<FaSquareUpwork className="text-3xl hover:text-headings transition-all duration-400" />
-						</a>
-					</div>
+					<SocialLinks />
 				</aside>
 
-				<main className="pt-24 lg:w-[52%] lg:py-24">
+				<main id="content" className="pt-24 lg:w-[52%] lg:py-24">
 					<About />
 					<Experience />
 					<Projects />
@@ -146,6 +37,6 @@ export default function Home() {
 					<Footer />
 				</main>
 			</div>
-		</div>
+		</CursorGlow>
 	);
 }

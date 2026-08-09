@@ -12,6 +12,9 @@ export const metadata: Metadata = {
 	description:
 		"I build pixel-perfect, responsive, and accessible web experiences.",
 	metadataBase: new URL("https://artikov.tech"),
+	alternates: {
+		canonical: "/",
+	},
 	openGraph: {
 		title: "Oybek Artikov - Frontend Developer",
 		description: "Portfolio site showcasing work, experience, and projects.",
@@ -19,9 +22,28 @@ export const metadata: Metadata = {
 		siteName: "artikov.tech",
 		type: "website",
 	},
-	icons: {
-		icon: "/favicon.ico",
+};
+
+const personJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Oybek Artikov",
+	url: "https://artikov.tech",
+	jobTitle: "Frontend Developer",
+	description:
+		"I build pixel-perfect, responsive, and accessible web experiences.",
+	worksFor: {
+		"@type": "Organization",
+		name: "The Ministry of Digital Technologies",
+		url: "https://gov.uz/en/digital",
 	},
+	sameAs: [
+		"https://github.com/artikov",
+		"https://www.linkedin.com/in/artikov/",
+		"https://x.com/artikov08",
+		"https://instagram.com/artikxv",
+		"https://www.upwork.com/freelancers/artikov",
+	],
 };
 
 export default function RootLayout({
@@ -31,7 +53,19 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${interSans.variable} antialiased`}>{children}</body>
+			<body className={`${interSans.variable} antialiased`}>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+				/>
+				<a
+					href="#content"
+					className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-surface focus:px-4 focus:py-2 focus:text-headings"
+				>
+					Skip to content
+				</a>
+				{children}
+			</body>
 		</html>
 	);
 }

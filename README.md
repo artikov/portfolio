@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# artikov.tech
 
-## Getting Started
+Personal portfolio of Oybek Artikov — frontend developer. Live at
+[artikov.tech](https://artikov.tech).
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router), statically prerendered
+- **React 19**
+- **Tailwind CSS v4**
+- **TypeScript**
+- **Inter** via `next/font/google`, icons from `react-icons`
+- Deployed on **Vercel**
+
+## Running it
+
+Requires Node 20+ and npm (there is a single `package-lock.json`; do not add a
+second lockfile).
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script          | What it does                        |
+| --------------- | ----------------------------------- |
+| `npm run dev`   | Dev server with Turbopack           |
+| `npm run build` | Production build                    |
+| `npm start`     | Serve a production build            |
+| `npm run lint`  | ESLint                              |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Layout
 
-## Learn More
+```
+src/
+  app/         routes, metadata, sitemap/robots, OG image
+  components/  UI; only CursorGlow, SectionNav and CurrentYear are client
+  data/        projects, experience and site content, typed in types.ts
+  lib/         shared style strings
+public/        CV and project screenshots
+```
 
-To learn more about Next.js, take a look at the following resources:
+Content lives in `src/data` — adding a project means adding an entry to
+`projectsData` (homepage) or `archivedProjectsData` (`/archive` table), not
+touching a component. Project thumbnails are imported statically so `next/image`
+can derive their dimensions and avoid layout shift.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Both pages are Server Components. The three client components exist for the
+  cursor gradient, the scroll-spy nav, and the copyright year.
+- Security headers and the CSP live in `next.config.ts`. The CSP needs
+  `'unsafe-inline'` for styles while the cursor gradient is an inline style.
+- CI runs `npm ci`, lint and build on every push and pull request.

@@ -1,43 +1,26 @@
-"use client";
-
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { archivedProjectsData } from "../../../data/projects";
-import { useState } from "react";
+import { archivedProjectsData } from "@/data/projects";
+import { ArrowRightIcon } from "@/components/icons";
+import CursorGlow from "@/components/CursorGlow";
+
+export const metadata: Metadata = {
+	title: "Project Archive - Oybek Artikov",
+	description:
+		"A complete list of the web projects I've built, from client work to personal experiments.",
+	alternates: { canonical: "/archive" },
+};
 
 const ArchivePage = () => {
-	const [position, setPosition] = useState({ x: 0, y: 0 });
-
-	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		setPosition({ x: e.clientX, y: e.clientY + window.scrollY });
-	};
-
 	return (
-		<div onMouseMove={handleMouseMove} className="relative">
-			<div
-				className="pointer-events-none fixed inset-0 z-40 transition duration-300 lg:absolute"
-				style={{
-					background: `radial-gradient(600px at ${position.x}px ${position.y}px, rgba(29, 78, 116, 0.15), transparent 80%)`,
-				}}
-			></div>
+		<CursorGlow>
 			<div className="min-h-screen max-w-screen-xl mx-auto px-6 py-12 font-sans md:px-12 md:py-16 ">
 				<Link
 					href="/"
 					className="group mb-2 inline-flex items-center font-semibold leading-tight text-accent"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-						className="mr-1 h-4 w-4 rotate-180 transition-transform group-hover:-translate-x-2"
-						aria-hidden="true"
-					>
-						<path
-							fillRule="evenodd"
-							d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-							clipRule="evenodd"
-						></path>
-					</svg>
+					<ArrowRightIcon className="mr-1 h-4 w-4 rotate-180 transition-transform group-hover:-translate-x-2" />
 					Oybek Artikov
 				</Link>
 				<h1 className="text-5xl font-bold mt-4 mb-8">All Projects</h1>
@@ -72,14 +55,20 @@ const ArchivePage = () => {
 											))}
 										</td>
 										<td className="pr-4">
-											<Link
-												href={url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="hover:underline hover:text-accent text-xs transition-all duration-200"
-											>
-												{link} ↗
-											</Link>
+											{url ? (
+												<a
+													href={url}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="hover:underline hover:text-accent text-xs transition-all duration-200"
+												>
+													{link} ↗
+												</a>
+											) : (
+												<span className="text-xs text-foreground/70">
+													{link}
+												</span>
+											)}
 										</td>
 									</tr>
 								)
@@ -88,7 +77,7 @@ const ArchivePage = () => {
 					</table>
 				</div>
 			</div>
-		</div>
+		</CursorGlow>
 	);
 };
 
