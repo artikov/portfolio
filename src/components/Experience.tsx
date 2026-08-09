@@ -1,15 +1,16 @@
 import React from "react";
-import Link from "next/link";
-import { experienceData } from "../../data/experience";
+import SectionHeading from "./SectionHeading";
+import { ExternalLinkIcon } from "./icons";
+import { experienceData } from "@/data/experience";
 
 const Experience = () => {
 	return (
-		<section id="experience" className="text-foreground/70 scroll-mt-16 mb-16">
-			<div className="sticky md:hidden top-0 z-20 -mx-6 mb-4 w-screen bg-background/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-				<h2 className="md:hidden text-xl uppercase text-headings font-semibold">
-					Experience
-				</h2>
-			</div>
+		<section
+			id="experience"
+			aria-labelledby="experience-heading"
+			className="text-foreground/70 scroll-mt-16 mb-16"
+		>
+			<SectionHeading id="experience-heading">Experience</SectionHeading>
 			<ol className="flex flex-col group/list transition-all duration-500 ">
 				{experienceData.map(
 					({ id, title, description, company, years, tags, link }) => (
@@ -33,33 +34,21 @@ const Experience = () => {
 													{title} @{" "}
 													<span className="inline-block">
 														{company}
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															viewBox="0 0 20 20"
-															fill="currentColor"
-															className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
-															aria-hidden="true"
-														>
-															<path
-																fillRule="evenodd"
-																d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-																clipRule="evenodd"
-															></path>
-														</svg>
+														<ExternalLinkIcon />
 													</span>
 												</span>
 											</a>
 										</div>
 									</h3>
-									<p className="mt-2 text-sm leading-normal  text-justify">
+									<p className="mt-2 text-sm leading-normal">
 										{description}
 									</p>
 									<ul
 										className="mt-2 flex flex-wrap"
 										aria-label="Technologies used"
 									>
-										{tags.map((tag, index) => (
-											<li className="mr-1.5 mt-2" key={index}>
+										{tags.map((tag) => (
+											<li className="mr-1.5 mt-2" key={tag}>
 												<div className="flex items-center rounded-full bg-accent/10 px-3 py-1 text-xs font-medium leading-5 text-accent	">
 													{tag}
 												</div>
@@ -74,7 +63,7 @@ const Experience = () => {
 			</ol>
 			<h3 className="font-medium leading-snug text-headings">
 				<div>
-					<Link
+					<a
 						className="inline-flex items-baseline font-medium leading-tight text-headings hover:text-accent focus-visible:text-accent group/link text-base transition-all duration-500"
 						href="/cv.pdf"
 						target="_blank"
@@ -83,22 +72,10 @@ const Experience = () => {
 						<span>
 							View full resume
 							<span className="inline-block">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20"
-									fill="currentColor"
-									className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
-									aria-hidden="true"
-								>
-									<path
-										fillRule="evenodd"
-										d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-										clipRule="evenodd"
-									></path>
-								</svg>
+								<ExternalLinkIcon />
 							</span>
 						</span>
-					</Link>
+					</a>
 				</div>
 			</h3>
 		</section>

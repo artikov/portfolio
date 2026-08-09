@@ -1,11 +1,14 @@
-import artikovTechImage from "../public/projects/artikov-tech.png";
-import referenceImage from "../public/projects/reference.png";
-import optimumImage from "../public/projects/optimum.png";
-import sparkImage from "../public/projects/spark.png";
-import jayxunImage from "../public/projects/jayxun.png";
-import ilhomImage from "../public/projects/ilhom.png";
+import artikovTechImage from "../../public/projects/artikov-tech.png";
+import referenceImage from "../../public/projects/reference.png";
+import optimumImage from "../../public/projects/optimum.png";
+import sparkImage from "../../public/projects/spark.png";
+import jayxunImage from "../../public/projects/jayxun.png";
+import ilhomImage from "../../public/projects/ilhom.png";
+import blogImage from "../../public/projects/blog.png";
+import type { ArchivedProject, Project } from "./types";
+import { blogUrl } from "./site";
 
-export const projectsData = [
+export const projectsData: Project[] = [
 	{
 		id: 1,
 		title: "Artikov Tech",
@@ -61,13 +64,13 @@ export const projectsData = [
 		id: 6,
 		title: "Ilhom Market",
 		description:
-			"Ilhom Market is an local marketplace that connects buyers and sellers, offering a wide range of products and services.",
+			"Ilhom Market is a local marketplace that connects buyers and sellers, offering a wide range of products and services.",
 		tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vuexy UI"],
 		url: null,
 		image: ilhomImage,
 	},
 ];
-export const archivedProjectsData = [
+export const archivedProjectsData: ArchivedProject[] = [
 	{
 		id: 1,
 		title: "Artikov Tech",
@@ -100,7 +103,7 @@ export const archivedProjectsData = [
 		id: 3,
 		title: "Ilhom Market",
 		description:
-			"Ilhom Market is an local marketplace that connects buyers and sellers, offering a wide range of products and services.",
+			"Ilhom Market is a local marketplace that connects buyers and sellers, offering a wide range of products and services.",
 		tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vuexy UI"],
 		url: null,
 		year: 2025,
@@ -239,5 +242,18 @@ export const archivedProjectsData = [
 		year: 2022,
 		company: "Personal",
 		link: "weather-app-js",
+	},
+];
+
+/** Rendered below the projects list with the same card as `projectsData`. */
+export const otherItemsData: Project[] = [
+	{
+		id: 1,
+		title: "Artikov's Blog",
+		description:
+			"Explore my thoughts, tutorials, and insights on web development, design, and technology.",
+		tags: ["WordPress", "PHP", "MySQL"],
+		url: blogUrl,
+		image: blogImage,
 	},
 ];
