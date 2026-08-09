@@ -1,3 +1,10 @@
+import artikovTechImage from "../public/projects/artikov-tech.png";
+import referenceImage from "../public/projects/reference.png";
+import optimumImage from "../public/projects/optimum.png";
+import sparkImage from "../public/projects/spark.png";
+import jayxunImage from "../public/projects/jayxun.png";
+import ilhomImage from "../public/projects/ilhom.png";
+
 export const projectsData = [
 	{
 		id: 1,
@@ -12,7 +19,7 @@ export const projectsData = [
 			"Shadcn UI",
 		],
 		url: "https://artikov.tech",
-		image: "/projects/artikov-tech.png",
+		image: artikovTechImage,
 	},
 	{
 		id: 2,
@@ -21,7 +28,7 @@ export const projectsData = [
 			"A curated collection of resources for developers, including articles, tools, and libraries to enhance productivity and knowledge.",
 		tags: ["JavaScript", "TypeScript", "MD"],
 		url: "https://cheatsheets.zip/",
-		image: "/projects/reference.png",
+		image: referenceImage,
 	},
 	{
 		id: 3,
@@ -30,7 +37,7 @@ export const projectsData = [
 			"Website for Optimum hair removal clinic, showcasing their services, team, and client testimonials.",
 		tags: ["Next.js", "TypeScript", "Tailwind CSS"],
 		url: "https://optimumlaserhairremoval.com/",
-		image: "/projects/optimum.png",
+		image: optimumImage,
 	},
 	{
 		id: 4,
@@ -39,7 +46,7 @@ export const projectsData = [
 			"SparkIQ is a platform that provides AI-driven insights and analytics for businesses, helping them make data-driven decisions.",
 		tags: ["React.js", "TypeScript", "Tailwind CSS", "Animations"],
 		url: "https://www.sparkiq.io/",
-		image: "/projects/spark.png",
+		image: sparkImage,
 	},
 	{
 		id: 5,
@@ -48,7 +55,7 @@ export const projectsData = [
 			"Jayxun Invest is a pharmacological company that specializes in the development and distribution of innovative healthcare solutions.",
 		tags: ["React.js", "TypeScript", "Tailwind CSS"],
 		url: "https://jayxuninvest.uz/",
-		image: "/projects/jayxun.png",
+		image: jayxunImage,
 	},
 	{
 		id: 6,
@@ -57,7 +64,7 @@ export const projectsData = [
 			"Ilhom Market is an local marketplace that connects buyers and sellers, offering a wide range of products and services.",
 		tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vuexy UI"],
 		url: "#",
-		image: "/projects/ilhom.png",
+		image: ilhomImage,
 	},
 ];
 export const archivedProjectsData = [
