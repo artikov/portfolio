@@ -1,18 +1,15 @@
 import React from "react";
+import SectionHeading from "./SectionHeading";
+import ExternalLink from "./ExternalLink";
 
 const About = () => {
-	const linkStyles =
-		"text-headings hover:text-accent transition-all duration-300 font-bold";
 	return (
 		<section
 			id="about"
-			className="text-foreground/70 text-justify scroll-mt-16 mb-16"
+			aria-labelledby="about-heading"
+			className="text-foreground/70 scroll-mt-16 mb-16"
 		>
-			<div className="sticky md:hidden top-0 z-20 -mx-6 mb-4 w-screen bg-background/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-				<h2 className="md:hidden text-xl uppercase text-headings font-semibold">
-					About
-				</h2>
-			</div>
+			<SectionHeading id="about-heading">About</SectionHeading>
 			<p className="mb-2">
 				I&apos;m a frontend developer with a strong passion for building
 				accessible, pixel-perfect user interfaces that seamlessly bridge design
@@ -24,9 +21,9 @@ const About = () => {
 			</p>
 			<p className="mb-2">
 				I&apos;m a Frontend Developer at{" "}
-				<a href="https://gov.uz/en/digital" className={linkStyles}>
+				<ExternalLink href="https://gov.uz/en/digital">
 					The Ministry of Digital Technologies{" "}
-				</a>
+				</ExternalLink>
 				, where I focus on building accessible, scalable UI components that
 				power digital public services. My work ensures compliance with modern
 				web accessibility standards, contributing to a more inclusive user
@@ -36,38 +33,35 @@ const About = () => {
 			</p>
 			<p className="mb-2">
 				In the past, I&apos;ve built websites for various local{" "}
-				<a href="https://jayxuninvest.uz/" className={linkStyles}>
+				<ExternalLink href="https://jayxuninvest.uz/">
 					companies
-				</a>{" "}
+				</ExternalLink>{" "}
 				and worked at{" "}
-				<a href="https://www.wematchwell.com/" className={linkStyles}>
+				<ExternalLink href="https://www.wematchwell.com/">
 					US-based companies
-				</a>{" "}
+				</ExternalLink>{" "}
 				on a wide range of web development projects. I&apos;ve also worked as a
 				freelancer on{" "}
-				<a
-					href="https://www.upwork.com/freelancers/artikov"
-					className={linkStyles}
-				>
+				<ExternalLink href="https://www.upwork.com/freelancers/artikov">
 					Upwork
-				</a>
+				</ExternalLink>
 				, delivering high-quality solutions to international{" "}
-				<a href="https://www.sparkiq.io/" className={linkStyles}>
+				<ExternalLink href="https://www.sparkiq.io/">
 					clients
-				</a>
+				</ExternalLink>
 				. Beyond client work, I contribute to
-				<a href="https://github.com/Fechin/reference" className={linkStyles}>
+				<ExternalLink href="https://github.com/Fechin/reference">
 					{" "}
 					open-source
-				</a>{" "}
+				</ExternalLink>{" "}
 				projects and actively share knowledge with the developer community.
 			</p>
 
 			<p className="mb-2">
 				I&apos;m also the founder of{" "}
-				<a href="https://artikov.tech" className={linkStyles}>
+				<ExternalLink href="https://artikov.tech">
 					Artikov Tech
-				</a>
+				</ExternalLink>
 				, a development company I currently lead, focused on building impactful
 				digital products and mentoring aspiring developers.
 			</p>
