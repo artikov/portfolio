@@ -12,27 +12,43 @@ const SectionNav = () => {
 	const [active, setActive] = useState("about");
 
 	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				// A thin band across the middle of the viewport: a section counts as
-				// active once it crosses it, regardless of how tall the section is.
-				// `isIntersecting` alone is not a threshold test, and `entries` only
-				// carries sections whose visibility changed -- so pick the topmost one
-				// by position rather than trusting document order.
-				const visible = entries
-					.filter((entry) => entry.isIntersecting)
-					.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-				if (visible[0]) setActive(visible[0].target.id);
-			},
-			{ rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-		);
+		const elements = sections
+			.map(({ id }) => document.getElementById(id))
+			.filter((el): el is HTMLElement => el !== null);
+		if (elements.length === 0) return;
 
-		sections.forEach(({ id }) => {
-			const el = document.getElementById(id);
-			if (el) observer.observe(el);
-		});
+		let frame = 0;
 
-		return () => observer.disconnect();
+		const update = () => {
+			frame = 0;
+			// The active section is the last one whose top has crossed a reference
+			// line 40% down the viewport. This reads absolute geometry every frame
+			// rather than reacting to intersection deltas: an IntersectionObserver
+			// only reports sections whose visibility *changed*, so a section that
+			// stays in view while its neighbour leaves is never in the callback and
+			// silently never becomes active -- which is how Experience got skipped
+			// on tall viewports.
+			const line = window.innerHeight * 0.4;
+			let current = elements[0];
+			for (const el of elements) {
+				if (el.getBoundingClientRect().top <= line) current = el;
+			}
+			setActive(current.id);
+		};
+
+		const onScroll = () => {
+			if (!frame) frame = requestAnimationFrame(update);
+		};
+
+		update();
+		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("resize", onScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("resize", onScroll);
+			if (frame) cancelAnimationFrame(frame);
+		};
 	}, []);
 
 	return (
