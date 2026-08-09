@@ -1,20 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+/** The year never changes while the page is open, so nothing to subscribe to. */
+const subscribe = () => () => {};
+const getCurrentYear = () => new Date().getFullYear();
 
 /**
  * The page is statically prerendered, so a `new Date()` in the server tree is
  * frozen at build time and would still read the build year well into the next
- * one. Start from the prerendered value so hydration matches, then correct it
- * on mount.
+ * one. `buildYear` is what the prerendered HTML contains, so hydration matches;
+ * the client snapshot then corrects it.
  */
 const CurrentYear = ({ buildYear }: { buildYear: number }) => {
-	const [year, setYear] = useState(buildYear);
-
-	useEffect(() => {
-		const current = new Date().getFullYear();
-		if (current !== buildYear) setYear(current);
-	}, [buildYear]);
+	const year = useSyncExternalStore(
+		subscribe,
+		getCurrentYear,
+		() => buildYear
+	);
 
 	return <>{year}</>;
 };
