@@ -1,25 +1,19 @@
-"use client";
-
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { archivedProjectsData } from "../../../data/projects";
-import { useState } from "react";
+import CursorGlow from "@/components/CursorGlow";
+
+export const metadata: Metadata = {
+	title: "Project Archive - Oybek Artikov",
+	description:
+		"A complete list of the web projects I've built, from client work to personal experiments.",
+	alternates: { canonical: "/archive" },
+};
 
 const ArchivePage = () => {
-	const [position, setPosition] = useState({ x: 0, y: 0 });
-
-	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		setPosition({ x: e.clientX, y: e.clientY + window.scrollY });
-	};
-
 	return (
-		<div onMouseMove={handleMouseMove} className="relative">
-			<div
-				className="pointer-events-none fixed inset-0 z-40 transition duration-300 lg:absolute"
-				style={{
-					background: `radial-gradient(600px at ${position.x}px ${position.y}px, rgba(29, 78, 116, 0.15), transparent 80%)`,
-				}}
-			></div>
+		<CursorGlow>
 			<div className="min-h-screen max-w-screen-xl mx-auto px-6 py-12 font-sans md:px-12 md:py-16 ">
 				<Link
 					href="/"
@@ -72,14 +66,20 @@ const ArchivePage = () => {
 											))}
 										</td>
 										<td className="pr-4">
-											<Link
-												href={url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="hover:underline hover:text-accent text-xs transition-all duration-200"
-											>
-												{link} ↗
-											</Link>
+											{url ? (
+												<Link
+													href={url}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="hover:underline hover:text-accent text-xs transition-all duration-200"
+												>
+													{link} ↗
+												</Link>
+											) : (
+												<span className="text-xs text-foreground/70">
+													{link}
+												</span>
+											)}
 										</td>
 									</tr>
 								)
@@ -88,7 +88,7 @@ const ArchivePage = () => {
 					</table>
 				</div>
 			</div>
-		</div>
+		</CursorGlow>
 	);
 };
 

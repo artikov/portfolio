@@ -4,27 +4,38 @@ import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
-import { FaSquareUpwork } from "react-icons/fa6";
+import CursorGlow from "@/components/CursorGlow";
+import {
+	FaSquareGithub,
+	FaLinkedin,
+	FaSquareInstagram,
+	FaSquareXTwitter,
+	FaSquareUpwork,
+} from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import OtherItems from "@/components/OtherItems";
 
 const sectionIds = ["about", "experience", "projects"];
 
 export default function Home() {
-	const [position, setPosition] = useState({ x: 0, y: 0 });
 	const [active, setActive] = useState("about");
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			(entries) => {
-				const visibleSection = entries.find((entry) => entry.isIntersecting);
-				if (visibleSection?.target?.id) {
-					setActive(visibleSection.target.id);
-				}
+				// A thin band across the middle of the viewport: a section counts as
+				// active once it crosses it, regardless of how tall the section is.
+				// `isIntersecting` alone is not a threshold test, and `entries` only
+				// carries sections whose visibility changed -- so pick the topmost one
+				// by position rather than trusting document order.
+				const visible = entries
+					.filter((entry) => entry.isIntersecting)
+					.sort(
+						(a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+					);
+				if (visible[0]) setActive(visible[0].target.id);
 			},
-			{
-				threshold: 0.6, // section 60% visible
-			}
+			{ rootMargin: "-45% 0px -45% 0px", threshold: 0 }
 		);
 
 		sectionIds.forEach((id) => {
@@ -35,19 +46,8 @@ export default function Home() {
 		return () => observer.disconnect();
 	}, []);
 
-	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		setPosition({ x: e.clientX, y: e.clientY + window.scrollY });
-	};
-
 	return (
-		<div onMouseMove={handleMouseMove} className="relative">
-			<div
-				className="pointer-events-none fixed inset-0 z-40 transition duration-300 lg:absolute"
-				style={{
-					background: `radial-gradient(600px at ${position.x}px ${position.y}px, rgba(29, 78, 116, 0.15), transparent 80%)`,
-				}}
-			></div>
-
+		<CursorGlow>
 			<div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0 md:flex">
 				{/* Sidebar */}
 				<aside className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
@@ -101,7 +101,7 @@ export default function Home() {
 							rel="noreferrer noopener"
 							aria-label="GitHub"
 						>
-							<i className="ri-github-fill text-3xl hover:text-headings transition-all duration-400"></i>
+							<FaSquareGithub className="text-3xl hover:text-headings transition-all duration-400" />
 						</a>
 						<a
 							href="https://www.linkedin.com/in/artikov/"
@@ -109,7 +109,7 @@ export default function Home() {
 							rel="noreferrer noopener"
 							aria-label="LinkedIn"
 						>
-							<i className="ri-linkedin-box-fill text-3xl hover:text-headings transition-all duration-400"></i>
+							<FaLinkedin className="text-3xl hover:text-headings transition-all duration-400" />
 						</a>
 						<a
 							href="https://instagram.com/artikxv"
@@ -117,7 +117,7 @@ export default function Home() {
 							rel="noreferrer noopener"
 							aria-label="Instagram"
 						>
-							<i className="ri-instagram-fill text-3xl hover:text-headings transition-all duration-400"></i>
+							<FaSquareInstagram className="text-3xl hover:text-headings transition-all duration-400" />
 						</a>
 						<a
 							href="https://x.com/artikov08"
@@ -125,7 +125,7 @@ export default function Home() {
 							rel="noreferrer noopener"
 							aria-label="X (formerly Twitter)"
 						>
-							<i className="ri-twitter-x-fill text-3xl hover:text-headings transition-all duration-400"></i>
+							<FaSquareXTwitter className="text-3xl hover:text-headings transition-all duration-400" />
 						</a>
 						<a
 							href="https://www.upwork.com/freelancers/artikov"
@@ -146,6 +146,6 @@ export default function Home() {
 					<Footer />
 				</main>
 			</div>
-		</div>
+		</CursorGlow>
 	);
 }
