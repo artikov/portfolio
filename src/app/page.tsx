@@ -95,21 +95,43 @@ export default function Home() {
 						</nav>
 					</div>
 					<div className="flex gap-4 items-center text-foreground/70">
-						<a href="https://github.com/artikov" target="_blank">
+						<a
+							href="https://github.com/artikov"
+							target="_blank"
+							rel="noreferrer noopener"
+							aria-label="GitHub"
+						>
 							<i className="ri-github-fill text-3xl hover:text-headings transition-all duration-400"></i>
 						</a>
-						<a href="https://www.linkedin.com/in/artikov/" target="_blank">
+						<a
+							href="https://www.linkedin.com/in/artikov/"
+							target="_blank"
+							rel="noreferrer noopener"
+							aria-label="LinkedIn"
+						>
 							<i className="ri-linkedin-box-fill text-3xl hover:text-headings transition-all duration-400"></i>
 						</a>
-						<a href="https://instagram.com/artikxv" target="_blank">
+						<a
+							href="https://instagram.com/artikxv"
+							target="_blank"
+							rel="noreferrer noopener"
+							aria-label="Instagram"
+						>
 							<i className="ri-instagram-fill text-3xl hover:text-headings transition-all duration-400"></i>
 						</a>
-						<a href="https://x.com/artikov08" target="_blank">
+						<a
+							href="https://x.com/artikov08"
+							target="_blank"
+							rel="noreferrer noopener"
+							aria-label="X (formerly Twitter)"
+						>
 							<i className="ri-twitter-x-fill text-3xl hover:text-headings transition-all duration-400"></i>
 						</a>
 						<a
 							href="https://www.upwork.com/freelancers/artikov"
 							target="_blank"
+							rel="noreferrer noopener"
+							aria-label="Upwork"
 						>
 							<FaSquareUpwork className="text-3xl hover:text-headings transition-all duration-400" />
 						</a>

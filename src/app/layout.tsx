@@ -17,14 +17,6 @@ export const metadata: Metadata = {
 		description: "Portfolio site showcasing work, experience, and projects.",
 		url: "https://artikov.tech",
 		siteName: "artikov.tech",
-		images: [
-			{
-				url: "/og-image.png", // Add this later to /public
-				width: 1200,
-				height: 630,
-				alt: "Oybek Artikov - Portfolio",
-			},
-		],
 		type: "website",
 	},
 	icons: {
