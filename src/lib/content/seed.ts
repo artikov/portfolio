@@ -45,7 +45,7 @@ export const SEED_CONTENT: SiteContent = {
 	about: {
 		paragraphs: [
 			"I'm a frontend developer with a strong passion for building accessible, pixel-perfect user interfaces that seamlessly bridge design and functionality. I specialize in crafting user experiences that are not only visually polished but also engineered for speed, scalability, and usability. Whether it's frontend finesse or backend logic, I thrive where design meets robust development—turning ideas into reliable, elegant solutions.",
-			"I'm a Frontend Developer at [The Ministry of Digital Technologies ](https://gov.uz/en/digital), where I focus on building accessible, scalable UI components that power digital public services. My work ensures compliance with modern web accessibility standards, contributing to a more inclusive user experience. In addition to my development role, I actively mentor new developers—helping them master frontend fundamentals and grow into skilled, confident professionals.",
+			"I'm currently a **Lead Frontend Developer** at an early-stage startup based in the Netherlands, building a SaaS platform that lets Shopify store owners manage their customers over WhatsApp. I work in TypeScript and React with Radix UI and Tailwind CSS, and build the React Flow canvas where merchants design their own messaging automations—shipping alongside Claude Code as part of my daily workflow. Before that, I spent two years at [The Ministry of Digital Technologies](https://gov.uz/en/digital), building accessible, scalable UI components that power digital public services and mentoring new developers as they grew into skilled, confident professionals.",
 			"In the past, I've built websites for various local [companies](https://jayxuninvest.uz/) and worked at [US-based companies](https://www.wematchwell.com/) on a wide range of web development projects. I've also worked as a freelancer on [Upwork](https://www.upwork.com/freelancers/artikov), delivering high-quality solutions to international [clients](https://www.sparkiq.io/). Beyond client work, I contribute to[ open-source](https://github.com/Fechin/reference) projects and actively share knowledge with the developer community.",
 			"I'm also the founder of [Artikov Tech](https://artikov.tech), a development company I currently lead, focused on building impactful digital products and mentoring aspiring developers.",
 			"In my free time, I enjoy reading non-fiction books, going for walks to recharge, or unwinding with a few rounds of {cs2} with friends.",
@@ -54,12 +54,32 @@ export const SEED_CONTENT: SiteContent = {
 
 	experience: [
 		{
-			id: "ministry-of-digital-technologies",
-			title: "Frontend Developer",
-			company: "The Ministry of Digital Technologies",
-			years: "2024 — Present",
+			id: "stealth-startup-netherlands",
+			title: "Lead Frontend Developer",
+			company: "Stealth Startup (Netherlands)",
+			years: "2026 — Present",
 			description:
-				"At The Ministry of Digital Technologies, I serve a dual role as both a mentor and a full-stack developer specializing in the MERN stack. I work closely with aspiring developers, guiding them through practical projects and hands-on training in frontend development and full-stack application building using React, Node.js, Express, and MongoDB. This experience has allowed me to stay current with the latest development trends while strengthening my leadership, communication, and full-stack development skills.",
+				"I build the frontend of a SaaS platform that lets Shopify store owners manage their customers over WhatsApp. The interface is TypeScript and React on Next.js, with Radix UI primitives and Tailwind CSS, and a React Flow canvas where merchants design their own messaging automations. Claude Code is part of my day-to-day workflow, which keeps delivery fast without loosening review discipline.",
+			tags: [
+				"TypeScript",
+				"React",
+				"Next.js",
+				"Radix UI",
+				"Tailwind CSS",
+				"React Flow",
+				"Shopify",
+				"WhatsApp API",
+				"Claude Code",
+			],
+			link: null,
+		},
+		{
+			id: "ministry-of-digital-technologies",
+			title: "Frontend Developer & Mentor",
+			company: "The Ministry of Digital Technologies",
+			years: "2024 — 2026",
+			description:
+				"At The Ministry of Digital Technologies, I served a dual role as both a mentor and a full-stack developer specializing in the MERN stack. I worked closely with aspiring developers, guiding them through practical projects and hands-on training in frontend development and full-stack application building using React, Node.js, Express, and MongoDB. This experience kept me current with the latest development trends while strengthening my leadership, communication, and full-stack development skills.",
 			tags: [
 				"HTML",
 				"CSS",
@@ -534,10 +554,9 @@ export const SEED_CONTENT: SiteContent = {
 			archiveTitle: "Project Archive - Oybek Artikov",
 			archiveDescription:
 				"A complete list of the web projects I've built, from client work to personal experiments.",
-			worksFor: {
-				name: "The Ministry of Digital Technologies",
-				url: "https://gov.uz/en/digital",
-			},
+			// The current employer is undisclosed and has no public URL, so the
+			// site publishes no employer rather than a stale one.
+			worksFor: null,
 		},
 	},
 };

@@ -44,11 +44,15 @@ export default async function RootLayout({
 		url: settings.siteUrl,
 		jobTitle: profile.role,
 		description: settings.seo.description,
-		worksFor: {
-			"@type": "Organization",
-			name: settings.seo.worksFor.name,
-			url: settings.seo.worksFor.url,
-		},
+		// Spread, not a null value: schema.org consumers should see no employer
+		// claim at all rather than an empty one.
+		...(settings.seo.worksFor && {
+			worksFor: {
+				"@type": "Organization",
+				name: settings.seo.worksFor.name,
+				url: settings.seo.worksFor.url,
+			},
+		}),
 		// Derived from the social links so the two can never disagree.
 		sameAs: content.socials.map((social) => social.href),
 	};
