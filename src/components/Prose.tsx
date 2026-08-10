@@ -4,9 +4,10 @@ import ExternalLink from "./ExternalLink";
 /**
  * Renders a stored prose string.
  *
- * Stored prose is plain text with exactly two pieces of markup:
+ * Stored prose is plain text with exactly three pieces of markup:
  *
  *   [label](https://example.com)  an external link
+ *   **emphasis**                  bold, styled to match an inline link
  *   {cs2}                         the CS2 hover animation in the About section
  *
  * Everything else becomes a React text node, so it is escaped by React and can
@@ -15,7 +16,8 @@ import ExternalLink from "./ExternalLink";
  * untrusted input. The URL pattern only accepts http(s), which is what keeps
  * `javascript:` out; anything that fails to match is left as literal text.
  */
-const TOKEN = /\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)|\{cs2\}/g;
+const TOKEN =
+	/\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)|\*\*([^*\n]+)\*\*|\{cs2\}/g;
 
 /** The hover animation is markup, not prose, so it stays a component. */
 const Cs2 = () => (
@@ -40,16 +42,22 @@ export function renderProse(text: string): React.ReactNode[] {
 	for (const match of text.matchAll(TOKEN)) {
 		if (match.index > cursor) nodes.push(text.slice(cursor, match.index));
 
-		const [token, label, href] = match;
-		nodes.push(
-			label ? (
+		const [token, label, href, bold] = match;
+		if (label) {
+			nodes.push(
 				<ExternalLink key={key++} href={href}>
 					{label}
 				</ExternalLink>
-			) : (
-				<Cs2 key={key++} />
-			)
-		);
+			);
+		} else if (bold) {
+			nodes.push(
+				<strong key={key++} className="font-bold text-headings">
+					{bold}
+				</strong>
+			);
+		} else {
+			nodes.push(<Cs2 key={key++} />);
+		}
 
 		cursor = match.index + token.length;
 	}

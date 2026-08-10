@@ -51,7 +51,8 @@ export interface ExperienceItem {
 	years: string;
 	description: string;
 	tags: string[];
-	link: string;
+	/** Null for employers with no public URL -- renders as plain text. */
+	link: string | null;
 }
 
 /**
@@ -95,7 +96,9 @@ export interface Seo {
 	siteName: string;
 	archiveTitle: string;
 	archiveDescription: string;
-	worksFor: { name: string; url: string };
+	/** Null when there is no employer to publish -- the field is then omitted
+	 * from the Person JSON-LD rather than emitted empty. */
+	worksFor: { name: string; url: string } | null;
 }
 
 export interface Settings {
@@ -231,7 +234,7 @@ function parseExperience(value: unknown, path: string): ExperienceItem {
 		years: asString(item.years, `${path}.years`),
 		description: asString(item.description, `${path}.description`),
 		tags: asStringArray(item.tags, `${path}.tags`),
-		link: asString(item.link, `${path}.link`),
+		link: asNullableString(item.link, `${path}.link`),
 	};
 }
 
@@ -263,7 +266,10 @@ function parseNavSection(value: unknown, path: string): NavSection {
 function parseSettings(value: unknown, path: string): Settings {
 	const settings = asRecord(value, path);
 	const seo = asRecord(settings.seo, `${path}.seo`);
-	const worksFor = asRecord(seo.worksFor, `${path}.seo.worksFor`);
+	const worksFor =
+		seo.worksFor === null
+			? null
+			: asRecord(seo.worksFor, `${path}.seo.worksFor`);
 	return {
 		siteUrl: asString(settings.siteUrl, `${path}.siteUrl`),
 		resumeUrl: asString(settings.resumeUrl, `${path}.resumeUrl`),
@@ -284,7 +290,7 @@ function parseSettings(value: unknown, path: string): Settings {
 				seo.archiveDescription,
 				`${path}.seo.archiveDescription`
 			),
-			worksFor: {
+			worksFor: worksFor && {
 				name: asString(worksFor.name, `${path}.seo.worksFor.name`),
 				url: asString(worksFor.url, `${path}.seo.worksFor.url`),
 			},

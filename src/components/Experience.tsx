@@ -29,21 +29,32 @@ const Experience = ({
 								<div className="z-10 sm:col-span-6">
 									<h3 className="font-medium leading-snug text-headings">
 										<div>
-											<a
-												className="inline-flex items-baseline font-medium leading-tight text-headings hover:text-accent focus-visible:text-accent group/link text-base transition-all duration-500"
-												href={link}
-												target="_blank"
-												rel="noreferrer noopener"
-											>
-												<span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"></span>
-												<span>
-													{title} @{" "}
-													<span className="inline-block">
-														{company}
-														<ExternalLinkIcon />
+											{link ? (
+												<a
+													className="inline-flex items-baseline font-medium leading-tight text-headings hover:text-accent focus-visible:text-accent group/link text-base transition-all duration-500"
+													href={link}
+													target="_blank"
+													rel="noreferrer noopener"
+												>
+													<span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"></span>
+													<span>
+														{title} @{" "}
+														<span className="inline-block">
+															{company}
+															<ExternalLinkIcon />
+														</span>
+													</span>
+												</a>
+											) : (
+												<span className="inline-flex items-baseline font-medium leading-tight text-headings text-base">
+													<span>
+														{title} @{" "}
+														<span className="inline-block">
+															{company}
+														</span>
 													</span>
 												</span>
-											</a>
+											)}
 										</div>
 									</h3>
 									<p className="mt-2 text-sm leading-normal">
