@@ -1,6 +1,8 @@
 import type { StaticImageData } from "next/image";
 
 import artikovTechImage from "../../../public/projects/artikov-tech.png";
+import samanidImage from "../../../public/projects/samanid.png";
+import crmImage from "../../../public/projects/crm.png";
 import referenceImage from "../../../public/projects/reference.png";
 import optimumImage from "../../../public/projects/optimum.png";
 import sparkImage from "../../../public/projects/spark.png";
@@ -111,6 +113,54 @@ export const SEED_CONTENT: SiteContent = {
 
 	projects: [
 		{
+			id: "samanid",
+			title: "Samanid",
+			description:
+				"Samanid is a US-based logistics company. The site pairs their public presence with a custom admin panel for managing content, shipments, and day-to-day operations.",
+			tags: ["Next.js", "TypeScript", "Tailwind CSS", "Postgres"],
+			url: "https://samanid.us/",
+			image: toImage(samanidImage, "Samanid screenshot"),
+			year: 2026,
+			company: "Artikov Tech",
+			link: "samanid.us",
+			onHomepage: true,
+			homepageOrder: 2,
+			inArchive: true,
+			archiveOrder: 1,
+		},
+		{
+			id: "skillproof",
+			title: "Skillproof",
+			description:
+				"A quiz application that tests and validates knowledge through an interactive interface, with real-time results and progress tracking.",
+			tags: ["JavaScript", "HTML", "CSS"],
+			url: "https://skillproof-quiz.vercel.app/",
+			image: null,
+			year: 2026,
+			company: "Personal",
+			link: "skillproof-quiz",
+			onHomepage: false,
+			homepageOrder: 0,
+			inArchive: true,
+			archiveOrder: 3,
+		},
+		{
+			id: "wedding-invitation",
+			title: "Wedding Invitation",
+			description:
+				"A single-page digital wedding invitation, giving couples an elegant and interactive way to share their day with guests online.",
+			tags: ["React.js", "JavaScript", "Tailwind CSS"],
+			url: "https://oybek-charos-invitation.vercel.app/",
+			image: null,
+			year: 2026,
+			company: "Personal",
+			link: "oybek-charos-invitation",
+			onHomepage: false,
+			homepageOrder: 0,
+			inArchive: true,
+			archiveOrder: 4,
+		},
+		{
 			id: "artikov-tech",
 			title: "Artikov Tech",
 			description:
@@ -130,7 +180,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: true,
 			homepageOrder: 1,
 			inArchive: true,
-			archiveOrder: 1,
+			archiveOrder: 5,
 		},
 		{
 			id: "reference",
@@ -144,9 +194,9 @@ export const SEED_CONTENT: SiteContent = {
 			company: "Github",
 			link: "cheatsheets.zip",
 			onHomepage: true,
-			homepageOrder: 2,
+			homepageOrder: 4,
 			inArchive: true,
-			archiveOrder: 4,
+			archiveOrder: 8,
 		},
 		{
 			id: "optimum",
@@ -160,9 +210,9 @@ export const SEED_CONTENT: SiteContent = {
 			company: "Upwork",
 			link: "optimumlaserhairremoval.com",
 			onHomepage: true,
-			homepageOrder: 3,
+			homepageOrder: 5,
 			inArchive: true,
-			archiveOrder: 2,
+			archiveOrder: 6,
 		},
 		{
 			id: "sparkiq",
@@ -176,9 +226,9 @@ export const SEED_CONTENT: SiteContent = {
 			company: "Upwork",
 			link: "sparkiq.io",
 			onHomepage: true,
-			homepageOrder: 4,
+			homepageOrder: 6,
 			inArchive: true,
-			archiveOrder: 5,
+			archiveOrder: 9,
 		},
 		{
 			id: "jayxun-invest",
@@ -192,9 +242,9 @@ export const SEED_CONTENT: SiteContent = {
 			company: "NLG",
 			link: "jayxuninvest.uz",
 			onHomepage: true,
-			homepageOrder: 5,
+			homepageOrder: 7,
 			inArchive: true,
-			archiveOrder: 6,
+			archiveOrder: 10,
 		},
 		{
 			id: "ilhom-market",
@@ -208,9 +258,25 @@ export const SEED_CONTENT: SiteContent = {
 			company: "NLG",
 			link: "Private Project",
 			onHomepage: true,
-			homepageOrder: 6,
+			homepageOrder: 8,
 			inArchive: true,
-			archiveOrder: 3,
+			archiveOrder: 7,
+		},
+		{
+			id: "student-management-crm",
+			title: "Student Management CRM",
+			description:
+				"A CRM built for local education centers in Uzbekistan, bringing student tracking, attendance, payments, and group management into one platform.",
+			tags: ["React.js", "TypeScript", "Recharts", "Postgres"],
+			url: "https://crm-student-management.vercel.app/",
+			image: toImage(crmImage, "Student Management CRM screenshot"),
+			year: 2026,
+			company: "Artikov Tech",
+			link: "crm-student-management",
+			onHomepage: true,
+			homepageOrder: 3,
+			inArchive: true,
+			archiveOrder: 2,
 		},
 		{
 			id: "uchqur-distribution",
@@ -226,7 +292,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 7,
+			archiveOrder: 11,
 		},
 		{
 			id: "xestfolio",
@@ -242,7 +308,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 8,
+			archiveOrder: 12,
 		},
 		{
 			id: "hoobank",
@@ -258,7 +324,25 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 9,
+			archiveOrder: 13,
+		},
+		{
+			id: "broshop",
+			title: "Broshop",
+			description:
+				"A full-stack e-commerce platform for technology products, built on the MERN stack, with dynamic product listings, a cart, and secure checkout.",
+			tags: ["React.js", "Node.js", "Express.js", "MongoDB"],
+			// The deployed demo is a suspended free-tier Render service, so the
+			// archive links the repository rather than a dead page.
+			url: "https://github.com/artikov/broshop",
+			image: null,
+			year: 2023,
+			company: "Personal",
+			link: "broshop",
+			onHomepage: false,
+			homepageOrder: 0,
+			inArchive: true,
+			archiveOrder: 14,
 		},
 		{
 			id: "personal-portfolio",
@@ -274,7 +358,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 10,
+			archiveOrder: 15,
 		},
 		{
 			id: "memories-web-app",
@@ -296,7 +380,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 11,
+			archiveOrder: 16,
 		},
 		{
 			id: "web-developer-portfolio",
@@ -312,7 +396,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 12,
+			archiveOrder: 17,
 		},
 		{
 			id: "keeper-clone",
@@ -334,7 +418,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 13,
+			archiveOrder: 18,
 		},
 		{
 			id: "arabic-flashcards",
@@ -350,7 +434,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 14,
+			archiveOrder: 19,
 		},
 		{
 			id: "weather-app",
@@ -366,7 +450,7 @@ export const SEED_CONTENT: SiteContent = {
 			onHomepage: false,
 			homepageOrder: 0,
 			inArchive: true,
-			archiveOrder: 15,
+			archiveOrder: 20,
 		},
 	],
 
