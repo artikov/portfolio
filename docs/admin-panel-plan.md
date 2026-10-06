@@ -331,6 +331,10 @@ Each is independently shippable. Order is lowest-blast-radius first.
   `nav`) get their list editor at this step too.
 - [ ] **16. Social links** — fixed icon enum, reorder, visibility. Confirm the
   JSON-LD `sameAs` array follows.
+  Contact (`content.contact`, added 2026-10-06 after the plan was written:
+  `{ intro, email, telegram }`, rendered last before the footer and in `nav`)
+  is edited here too. `telegram` is a bare handle validated against
+  Telegram's username rule; the renderer builds the `t.me` URL.
 - [ ] **17. About + Footer prose** — paragraph editor with a live preview
   rendering through the *same* allowlisted parser the site uses, so the preview
   cannot lie.

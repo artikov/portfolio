@@ -28,6 +28,12 @@ const SectionNav = ({ sections }: { sections: NavSection[] }) => {
 			for (const el of elements) {
 				if (el.getBoundingClientRect().top <= line) current = el;
 			}
+			// A short last section (Contact) can't scroll far enough to reach the
+			// line on a tall viewport, so at the bottom of the page it wins outright.
+			const atBottom =
+				window.innerHeight + window.scrollY >=
+				document.documentElement.scrollHeight - 2;
+			if (atBottom) current = elements[elements.length - 1];
 			setActive(current.id);
 		};
 
