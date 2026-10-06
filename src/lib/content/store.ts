@@ -1,5 +1,7 @@
 import "server-only";
 
+import { createHash } from "node:crypto";
+
 import { BlobNotFoundError, head, put } from "@vercel/blob";
 import { unstable_cache, updateTag } from "next/cache";
 
@@ -56,12 +58,27 @@ async function readContent(): Promise<SiteContent> {
 }
 
 /**
- * Cached so the public pages stay ISR-cached rather than fetching Blob on every
- * request. `revalidateContent()` is the only thing that busts it.
+ * `unstable_cache` keys on the function's source and the key parts, never on
+ * the data it closes over -- and the entry persists in `.next/cache`, which
+ * survives rebuilds and which Vercel restores between deploys. With a fixed
+ * key, a seed edit rebuilt from a warm cache prerendered the *old* seed.
+ * Hashing the seed into the key makes every seed change a new entry. A saved
+ * Blob document is cached under the same key, so a seed change also costs it
+ * one fresh read -- harmless.
  */
-const getCachedContent = unstable_cache(readContent, ["site-content"], {
-	tags: [CACHE_TAG],
-});
+const SEED_HASH = createHash("sha256")
+	.update(JSON.stringify(SEED_CONTENT))
+	.digest("hex");
+
+/**
+ * Cached so the public pages stay ISR-cached rather than fetching Blob on every
+ * request. `revalidateContent()` is the only thing that busts it at runtime.
+ */
+const getCachedContent = unstable_cache(
+	readContent,
+	["site-content", SEED_HASH],
+	{ tags: [CACHE_TAG] }
+);
 
 export async function getContent(): Promise<SiteContent> {
 	return getCachedContent();
