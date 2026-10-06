@@ -45,7 +45,7 @@ export const SEED_CONTENT: SiteContent = {
 	about: {
 		paragraphs: [
 			"I'm a frontend developer with a strong passion for building accessible, pixel-perfect user interfaces that seamlessly bridge design and functionality. I specialize in crafting user experiences that are not only visually polished but also engineered for speed, scalability, and usability. Whether it's frontend finesse or backend logic, I thrive where design meets robust development—turning ideas into reliable, elegant solutions.",
-			"I'm currently a **Lead Frontend Developer** at an early-stage startup based in the Netherlands, building a SaaS platform that lets Shopify store owners manage their customers over WhatsApp. I work in TypeScript and React with Radix UI and Tailwind CSS, and build the React Flow canvas where merchants design their own messaging automations—shipping alongside Claude Code as part of my daily workflow. Before that, I spent two years at [The Ministry of Digital Technologies](https://gov.uz/en/digital), building accessible, scalable UI components that power digital public services and mentoring new developers as they grew into skilled, confident professionals.",
+			"I'm currently a **Lead Frontend Developer** at an early-stage startup based in the Netherlands, building a SaaS platform that lets Shopify store owners manage their customers over WhatsApp. I work in TypeScript and React with Radix UI and Tailwind CSS, and build the React Flow canvas where merchants design their own messaging automations—shipping alongside Claude Code as part of my daily workflow. Alongside it, I spent most of 2026 as a Senior Software Engineer at [Revelo](https://www.revelo.com/), evaluating and writing code used to train large language models. Before that, I spent two years at [The Ministry of Digital Technologies](https://gov.uz/en/digital), building accessible, scalable UI components that power digital public services and mentoring new developers as they grew into skilled, confident professionals.",
 			"In the past, I've built websites for various local [companies](https://jayxuninvest.uz/) and worked at [US-based companies](https://www.wematchwell.com/) on a wide range of web development projects. I've also worked as a freelancer on [Upwork](https://www.upwork.com/freelancers/artikov), delivering high-quality solutions to international [clients](https://www.sparkiq.io/). Beyond client work, I contribute to[ open-source](https://github.com/Fechin/reference) projects and actively share knowledge with the developer community.",
 			"I'm also the founder of [Artikov Tech](https://artikov.tech), a development company I currently lead, focused on building impactful digital products and mentoring aspiring developers.",
 			"In my free time, I enjoy reading non-fiction books, going for walks to recharge, or unwinding with a few rounds of {cs2} with friends.",
@@ -74,6 +74,23 @@ export const SEED_CONTENT: SiteContent = {
 			link: null,
 		},
 		{
+			id: "revelo",
+			title: "Senior Software Engineer",
+			company: "Revelo",
+			years: "Jan — Oct 2026",
+			description:
+				"At Revelo, I evaluated and ranked AI-generated code across frontend and full-stack tasks for large language model training, applying rubrics for correctness, instruction-following, code style, and safety. I authored golden-standard prompt-response pairs in JavaScript, TypeScript, and React, validated AI-produced code changes before rating, and audited peer annotations to improve labeling consistency across the team.",
+			tags: [
+				"TypeScript",
+				"JavaScript",
+				"React",
+				"LLM Evaluation",
+				"SFT/RLHF",
+				"Prompt Engineering",
+			],
+			link: "https://www.revelo.com/",
+		},
+		{
 			id: "ministry-of-digital-technologies",
 			title: "Frontend Developer & Mentor",
 			company: "The Ministry of Digital Technologies",
@@ -95,9 +112,9 @@ export const SEED_CONTENT: SiteContent = {
 			id: "next-level-group",
 			title: "Frontend Developer",
 			company: "Next Level Group",
-			years: "2023 — 2025",
+			years: "2023 — 2024",
 			description:
-				"At Next Level, I worked as a Frontend Developer for 1.5 years, focusing on building and maintaining scalable user interfaces for web applications. This role sharpened my technical skills in React, CSS frameworks, and performance tuning, while enhancing collaboration in an agile, fast-paced environment.",
+				"At Next Level, I worked as a Frontend Developer, focusing on building and maintaining scalable user interfaces for web applications. This role sharpened my technical skills in React, CSS frameworks, and performance tuning, while enhancing collaboration in an agile, fast-paced environment.",
 			tags: ["HTML", "CSS", "JavaScript", "React", "Accessibility"],
 			link: "https://nlg.uz",
 		},
