@@ -165,6 +165,20 @@ six records differently, the record carries **two** order fields,
   (item 12), and the icon row orders Instagram before X while the old literal
   did the reverse. Order is not meaningful in `sameAs`; the five URLs are
   unchanged.
+- **A seed edit could be served stale (found and fixed 2026-10-06).**
+  `unstable_cache` keys on the wrapped function's source plus the key parts,
+  not on data the function closes over, and it persists entries in
+  `.next/cache/fetch-cache`. That directory survives `npm run build` and Vercel
+  restores it between deploys. With the fixed key `['site-content']`, a rebuild
+  after editing `seed.ts` without `rm -rf .next` prerendered the old seed text,
+  and a seed-only deploy could have shipped stale copy.
+  *Decision:* the key parts now include a SHA-256 of
+  `JSON.stringify(SEED_CONTENT)`, computed once at module load in `store.ts`.
+  The tag is unchanged, so `revalidateContent()` still busts it, and saved Blob
+  content is still cached. A seed change just costs that cached Blob read one
+  refetch. *Verified:* warm build → seed string edited → rebuild without
+  clearing `.next` → the new string is in `.next/server/app/index.html`.
+  Reverting brings the old string back.
 - **`opengraph-image.tsx`'s `alt` export cannot come from the store** — Next
   reads it statically without running the route. It is the one string in that
   file still hardcoded.
