@@ -113,6 +113,14 @@ export interface WritingSection {
 	items: ProjectCardItem[];
 }
 
+export interface Certificate {
+	id: string;
+	title: string;
+	issuer: string;
+	/** Null when there is no public credential URL -- renders as plain text. */
+	url: string | null;
+}
+
 export interface FooterContent {
 	prose: string;
 	tagline: string;
@@ -128,6 +136,7 @@ export interface SiteContent {
 	experience: ExperienceItem[];
 	projects: Project[];
 	writing: WritingSection;
+	certificates: Certificate[];
 	socials: SocialLink[];
 	nav: NavSection[];
 	footer: FooterContent;
@@ -238,6 +247,16 @@ function parseExperience(value: unknown, path: string): ExperienceItem {
 	};
 }
 
+function parseCertificate(value: unknown, path: string): Certificate {
+	const item = asRecord(value, path);
+	return {
+		id: asString(item.id, `${path}.id`),
+		title: asString(item.title, `${path}.title`),
+		issuer: asString(item.issuer, `${path}.issuer`),
+		url: asNullableString(item.url, `${path}.url`),
+	};
+}
+
 function parseSocial(value: unknown, path: string): SocialLink {
 	const item = asRecord(value, path);
 	const icon = asString(item.icon, `${path}.icon`);
@@ -334,6 +353,11 @@ export function parseSiteContent(value: unknown): SiteContent {
 				parseCardItem
 			),
 		},
+		certificates: asArray(
+			content.certificates,
+			"content.certificates",
+			parseCertificate
+		),
 		socials: asArray(content.socials, "content.socials", parseSocial),
 		nav: asArray(content.nav, "content.nav", parseNavSection),
 		footer: {

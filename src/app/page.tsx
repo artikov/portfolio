@@ -4,6 +4,7 @@ import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
 import SectionNav from "@/components/SectionNav";
+import Certificates from "@/components/Certificates";
 import OtherItems from "@/components/OtherItems";
 import SocialLinks from "@/components/SocialLinks";
 import { homepageProjects } from "@/lib/content/schema";
@@ -39,6 +40,7 @@ export default async function Home() {
 						resumeUrl={content.settings.resumeUrl}
 					/>
 					<Projects projects={homepageProjects(content)} />
+					<Certificates items={content.certificates} />
 					<OtherItems writing={content.writing} />
 					<Footer content={content.footer} />
 				</main>

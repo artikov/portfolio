@@ -326,6 +326,9 @@ Each is independently shippable. Order is lowest-blast-radius first.
   at this step, images still from the seed.
 - [ ] **14. Experience** — list editor with reorder.
 - [ ] **15. Writing / other items** — reuses the Projects editor.
+  Certificates (`content.certificates`, added 2026-10-06 after the plan was
+  written: `{ id, title, issuer, url | null }`, rendered after Projects and in
+  `nav`) get their list editor at this step too.
 - [ ] **16. Social links** — fixed icon enum, reorder, visibility. Confirm the
   JSON-LD `sameAs` array follows.
 - [ ] **17. About + Footer prose** — paragraph editor with a live preview
