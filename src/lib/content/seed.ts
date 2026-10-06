@@ -544,6 +544,12 @@ export const SEED_CONTENT: SiteContent = {
 		},
 	],
 
+	contact: {
+		intro: "Have a role, a project or just a question? I'm open to frontend positions and freelance work - the quickest way to reach me is email or Telegram.",
+		email: "artikov.dev@gmail.com",
+		telegram: "artikov_o",
+	},
+
 	socials: [
 		{
 			id: "github",
@@ -582,6 +588,7 @@ export const SEED_CONTENT: SiteContent = {
 		{ id: "experience", label: "Experience" },
 		{ id: "projects", label: "Projects" },
 		{ id: "certificates", label: "Certificates" },
+		{ id: "contact", label: "Contact" },
 	],
 
 	footer: {

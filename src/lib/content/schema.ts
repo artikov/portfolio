@@ -121,6 +121,14 @@ export interface Certificate {
 	url: string | null;
 }
 
+export interface ContactContent {
+	intro: string;
+	email: string;
+	/** Bare handle, no "@" -- the renderer builds the t.me URL, so a stored
+	 * value can never point the link off-site. */
+	telegram: string;
+}
+
 export interface FooterContent {
 	prose: string;
 	tagline: string;
@@ -137,6 +145,7 @@ export interface SiteContent {
 	projects: Project[];
 	writing: WritingSection;
 	certificates: Certificate[];
+	contact: ContactContent;
 	socials: SocialLink[];
 	nav: NavSection[];
 	footer: FooterContent;
@@ -257,6 +266,29 @@ function parseCertificate(value: unknown, path: string): Certificate {
 	};
 }
 
+// Telegram's own username rule.
+const TELEGRAM_HANDLE = /^[A-Za-z0-9_]{5,32}$/;
+
+function parseContact(value: unknown, path: string): ContactContent {
+	const contact = asRecord(value, path);
+	const email = asString(contact.email, `${path}.email`);
+	if (!email.includes("@")) {
+		throw new ContentValidationError(`${path}.email`, "must be an email");
+	}
+	const telegram = asString(contact.telegram, `${path}.telegram`);
+	if (!TELEGRAM_HANDLE.test(telegram)) {
+		throw new ContentValidationError(
+			`${path}.telegram`,
+			"must be a Telegram handle without the @"
+		);
+	}
+	return {
+		intro: asString(contact.intro, `${path}.intro`),
+		email,
+		telegram,
+	};
+}
+
 function parseSocial(value: unknown, path: string): SocialLink {
 	const item = asRecord(value, path);
 	const icon = asString(item.icon, `${path}.icon`);
@@ -358,6 +390,7 @@ export function parseSiteContent(value: unknown): SiteContent {
 			"content.certificates",
 			parseCertificate
 		),
+		contact: parseContact(content.contact, "content.contact"),
 		socials: asArray(content.socials, "content.socials", parseSocial),
 		nav: asArray(content.nav, "content.nav", parseNavSection),
 		footer: {
