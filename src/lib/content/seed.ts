@@ -511,6 +511,39 @@ export const SEED_CONTENT: SiteContent = {
 		],
 	},
 
+	certificates: [
+		{
+			id: "meta-front-end",
+			title: "Meta Front-End Developer Professional Certificate",
+			issuer: "Meta, Coursera",
+			url: "https://coursera.org/share/b65920698ea96ead65c0f8968d9409f3",
+		},
+		{
+			id: "aws-generative-ai",
+			title: "AWS Generative AI Applications Professional Certificate",
+			issuer: "Amazon Web Services, Coursera",
+			url: "https://coursera.org/share/13f10d24c3a14af08c6c34a2cde1f216",
+		},
+		{
+			id: "cs50",
+			title: "CS50: Introduction to Computer Science",
+			issuer: "Harvard University",
+			url: null,
+		},
+		{
+			id: "mern-ecommerce",
+			title: "MERN eCommerce From Scratch",
+			issuer: "Traversy Media, Udemy",
+			url: "https://www.udemy.com/certificate/UC-05c1830a-1f3e-4340-92d0-89519313abf5/",
+		},
+		{
+			id: "app-brewery",
+			title: "Web Development Bootcamp",
+			issuer: "The App Brewery, London",
+			url: "https://www.udemy.com/certificate/UC-53f372a4-b509-48a3-9295-7f96cabba6d3/",
+		},
+	],
+
 	socials: [
 		{
 			id: "github",
@@ -548,6 +581,7 @@ export const SEED_CONTENT: SiteContent = {
 		{ id: "about", label: "About" },
 		{ id: "experience", label: "Experience" },
 		{ id: "projects", label: "Projects" },
+		{ id: "certificates", label: "Certificates" },
 	],
 
 	footer: {
